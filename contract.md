@@ -21,6 +21,9 @@ However if a team member is habitually not completing their tasks, they may be a
 
 ### Signatures
 I, Jerry Wu (yihanwu4) agree to the terms of this contract.
+
 I, Simon Balisi (sbalisi2) agree to the terms of this contract.
+
 I, Raghavendra Bhat (rnbhat2) agree to the terms of this contract.
+
 I, Man Chong Chan (mcchan3) agree to the terms of this contract.
