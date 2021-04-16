@@ -5,7 +5,11 @@
 #include <string>
 #include <vector>
 #include <iterator>
-
+#include <string>
+#include <vector>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
 int main() {
     std::ifstream text("ErdosClean.csv");
 	
@@ -15,20 +19,17 @@ int main() {
 	}
 
     std::string authors = strStream.str();
-    
+    std::string s;
 
     std::vector<std::string> out;
     std::stringstream ss(authors);
-    while(ss.good()) {
-      std::string substr;
-      std::getline(ss, substr, ','); //get first string delimited by comma
-      out.push_back(substr);
+    while (ss >> std::quoted(s)) {
+        out.push_back(s);
     }
-    std::vector<std::string> result;
-    for (unsigned int i = 0; i < out.size(); i+=2) {
-        result.push_back(out[i] + " " + out[i+1]);
-    }
-    for (std::vector<std::string>::const_iterator i = result.begin(); i != result.end(); ++i)
-        std::cout << *i << "\n";
+
+    
+    
+    for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i)
+        std::cout << *i << " ";     
     return 0;
 }
