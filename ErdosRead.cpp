@@ -5,6 +5,6 @@
 using namespace std;
 
 void readErdos() {
-    std::string result = file_to_string("ErdosClean.csv");
+    std::string result = file_to_string("Erdos_Clean.csv");
     std::cout << result << std::endl;
 }

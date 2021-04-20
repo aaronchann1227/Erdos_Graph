@@ -11,7 +11,7 @@
 #include <iostream>
 #include <iomanip>
 int main() {
-    std::ifstream text("ErdosClean.csv");
+    std::ifstream text("Erdos_Clean.csv");
 	
 	std::stringstream strStream;
 	if (text.is_open()) {
