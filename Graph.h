@@ -1,5 +1,9 @@
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include "Edge.h"
+#include "Vertex.h"
+
 
 
 
@@ -9,7 +13,7 @@ class ErdosGraph {
         /**
         * Constructor for the Erdos Graph
         */ 
-        ErdosGraph(std::vector<std::string> names);
+        ErdosGraph(std::vector<std::string> erdosVec);
 
         /**
         * Abstract BFS traversal for the Erdos graph  
@@ -26,7 +30,11 @@ class ErdosGraph {
         std::vector<std::string> printPath(std::vector<Edge*> path);
     
     private:
+        //Vertex* head;
 
-        Vertex* head;
+        unordered_map< Vertex, vector<Edge*> > vertexMap
+
+        vector<Edge*> edges;
+
 
 };

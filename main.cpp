@@ -10,8 +10,19 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+
+#include "ErdosRead.hpp"
+
+using namespace std;
+
 int main() {
-    std::ifstream text("Erdos.csv");
+    // vector< vector<string> > erdosVec = readErdos();
+
+    // cout << erdosVec[0][1];
+    
+
+
+       std::ifstream text("Erdos.csv");
 	
 	std::stringstream strStream;
 	if (text.is_open()) {
@@ -34,14 +45,39 @@ int main() {
     
     unsigned con = 0;
     out[0].erase(0,1);
-    //out[out.size() - 1].erase(out[out.size() - 1].length() - 2,out[out.size() - 1].length() - 1);
+
+    // out[out.size() - 1].erase(out[out.size() - 1].length() - 2,out[out.size() - 1].length() - 1);
+    // for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i) {
+    //     con++;
+    //     std::cout << *i << "\n";
+    //     if (con > 100) {break;}
+    // }
+    // size_t size = out.size();
+    // std::cout << size << "";
+    // std::cout << out[out.size() - 1];
+
+
+    out.push_back("end123");
+
+    std::vector< std::vector<std::string> > erdosVec;
+    erdosVec.resize(513, vector<string> (0));
+
+    unsigned count = 0;
     for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i) {
-        con++;
-        std::cout << *i << "\n";
-        if (con > 9) {break;}
+        while (*i != "end123") {
+            erdosVec[count].push_back(*i);
+            ++i;
+        }
+        count++;
     }
-    size_t size = out.size();
-    std::cout << size << "";
-    std::cout << out[out.size() - 1];
+
+    return erdosVec;
+
+
+    
     return 0;
 }
+
+
+
+
