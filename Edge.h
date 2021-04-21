@@ -1,9 +1,12 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <Vertex.h>
 
-struct Edge {
-    Edge(string setV1, string setV2, double setWeight) {
+class Edge {
+
+
+    Edge(std::string setV1, Vertex setV2, double setWeight) {
         vertex1 = setV1;
         vertex2 = setV2;
         weight = setWeight;

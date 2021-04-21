@@ -13,7 +13,7 @@ class ErdosGraph {
         /**
         * Constructor for the Erdos Graph
         */ 
-        ErdosGraph(std::vector<std::string> erdosVec);
+        ErdosGraph(std::vector< std::vector<std::string> > erdosVec);
 
         /**
         * Abstract BFS traversal for the Erdos graph  

@@ -3,15 +3,23 @@
 #include <vector>
 
 
-struct Vertex {
+class Vertex {
 
-    Vertex(string setV1, string setV2, double setWeight) {
-        vertex1 = setV1;
-        vertex2 = setV2;
-        weight = setWeight;
-    }
+    public:
+    
+        Vertex(std::string author) : author(author) {}
 
-    string author;
-    vector<Edge*> edges;
+        std::string getAuthor() { return author; }
+
+        void setAuthor(std::string setAuthor) {this->author = setAuthor;}
+
+        
+
+    private:
+
+        std::string author;
+
+        std::vector<Edge*> edges;
+
     
 };
