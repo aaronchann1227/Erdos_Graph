@@ -13,6 +13,7 @@ class Vertex {
 
         void setAuthor(std::string setAuthor) {this->author = setAuthor;}
 
+        void addEdge(Edge* edge) { edges.push_back(edge);}
         
 
     private:

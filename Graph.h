@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -32,9 +33,11 @@ class ErdosGraph {
     private:
         //Vertex* head;
 
-        unordered_map< Vertex, vector<Edge*> > vertexMap
+        vector< Vertex*> vertices;
 
         vector<Edge*> edges;
 
+        unordered_map< string, Vertex*> uniqueAuthors;
 
+        Vertex* root;
 };
