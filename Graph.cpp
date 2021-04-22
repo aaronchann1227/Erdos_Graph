@@ -10,18 +10,23 @@ ErdosGraph::ErdosGraph(std::vector< std::vector<std::string> > erdosVec, unorder
 
     this->authorToPaper = authorToPaper;
     root->setAuthor("Erdos");
-
+    root->setID(0);
     vertices.push_back(&root);
 
     //Traverses through the erdosVec the first time while initializing an
     //unordered map that is filled with all of the unique author names in erdosVec
+    
+    unsigned int idCounter = 1;
     for (size_t i = 0; i < erdosVec.size(); i++) {
         for (size_t j = 1; j < erdosVec[i].size(); j++) {
             Vertex author(erdosVec[i][j]);
             if (uniqueAuthors.find(erdosVec[i][j]) == uniqueAuthors.end() ) {
+                author.setID(idCounter);
                 uniqueAuthors[erdosVec[i][j]] = &author;
                 //Initializes a vector of Vertex pointers to each unique author
                 vertices.push_back(&author);
+                
+                idCounter++;
             }
         }
     }
