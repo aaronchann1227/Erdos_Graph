@@ -93,7 +93,7 @@ int main() {
         authors.erase(0, pos + delimiter.length());
     }
 
- 
+    //Dictionary which contains all the publications between Erdos and Erdo1 people
     std::unordered_map<std::string , unsigned int> authorToPaper;
     for (size_t i = 0; i < out.size(); i += 2) {
         authorToPaper[out[i]] = std::stoi(out[i + 1]); 

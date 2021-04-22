@@ -5,8 +5,10 @@
 //unordered_map< Vertex, vector<Edge*> > vertexMap
 // vector<Edge*> edges;
 //
-ErdosGraph::ErdosGraph(std::vector< std::vector<std::string> > erdosVec) {
+ErdosGraph::ErdosGraph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
+
+    this->authorToPaper = authorToPaper;
     root->setAuthor("Erdos");
 
     vertices.push_back(&root);
@@ -26,9 +28,18 @@ ErdosGraph::ErdosGraph(std::vector< std::vector<std::string> > erdosVec) {
     //Initializes the edge vectors inside each Vertex inside the graph
     for (size_t i = 0; i < erdosVec.size(); i++) {
         Vertex* erdos1 = uniqueAuthors[erdosVec[i][0]];
+        //
+        //  1/(n(a,b)/[(erd(a)+erd(b))/2])
+        //
         //An edge will always have the following format:
         // Edge (name of whoever is closer to Erdos, name of second person, weight)
-        Edge erdosToErdos1("Erdos", erdos1->getAuthor(), 1);
+        double weight = 1;
+        unsigned int publications = 1;
+        if (authorToPaper.find(erdosVec[i][0]) != authorToPaper.end() ) {
+            publications = authorToPaper[erdosVec[i][0]];
+            weight = 1 / (2 * publications);
+        }
+        Edge erdosToErdos1("Erdos", erdos1->getAuthor(), weight);
         root->addEdge(&erdosToErdos1);
         erdos1->addEdge(&erdosToErdos1);
         for (size_t j = 1; j < erdosVec[i].size(); j++) {

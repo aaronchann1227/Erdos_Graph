@@ -33,11 +33,14 @@ class ErdosGraph {
     private:
         //Vertex* head;
 
-        vector< Vertex*> vertices;
+        std::vector< Vertex*> vertices;
 
         vector<Edge*> edges;
 
         unordered_map< string, Vertex*> uniqueAuthors;
 
         Vertex* root;
+
+        unordered_map<std::string , unsigned int> authorToPaper;
+
 };
