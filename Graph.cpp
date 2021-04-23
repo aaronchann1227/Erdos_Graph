@@ -59,17 +59,5 @@ ErdosGraph::ErdosGraph(std::vector< std::vector<std::string> > erdosVec, unorder
         }
 
     }
-
-
-
-    
-
-
-
-    
-
-
-
-
 }
 

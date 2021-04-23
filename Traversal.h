@@ -11,7 +11,7 @@ class Traversal{
         Traversal(const Graph & input_graph, const Vertex* start);
         void operator++();
         Vertex* operator*();
+        bool T_done();
     private:
         BFS BFS;
-        /** @todo [Part 1] */
 };

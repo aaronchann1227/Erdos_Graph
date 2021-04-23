@@ -8,35 +8,42 @@
 #include "Graph.h"
 #include "BFSGraph.h"
 using namespace std;
+
+/**
+ * BFS Constructor that takes in a reference to a graph and a starting vertex pointer.
+ */
 BFS::BFS(const Graph & input_graph, const Vertex* start) {  
   Start=start;
   q.push(Start);
   G=input_graph;
-}
-
-void BFS::add(const Vertex* & math_) {
-  q.push(math_);
-  /** @todo [Part 1] */
+  myarr.resize(G.getSize());
+  for (int i=0; i<myarr.size(); i++){
+    myarr[i]=0;
+  }
 }
 
 /**
- * Removes and returns the current Point in the traversal.
+ * Adds a vertex with the author's name to the traversal.
+ */
+void BFS::add(const Vertex* & math_) {
+  q.push(math_);
+}
+
+/**
+ * Removes and returns the current Vertex in the traversal.
  */
 Vertex* BFS::pop() {
-  /** @todo [Part 1] */
   Vertex v= q.front();
   q.pop();
   return v;
-  //return Point(0, 0);
 }
 
 /**
- * Returns the current Point in the traversal.
+ * Returns the current Vertex in the traversal.
  */
 Vertex* BFS::peek() const {
-  /** @todo [Part 1] */
+
   return q.front();
-  //return Point(0, 0);
 }
 
 /**
@@ -44,7 +51,6 @@ Vertex* BFS::peek() const {
  */
 bool BFS::empty() const {
   if (q.size()==0){
-  /** @todo [Part 1] */
     return true;
   }
   return false;

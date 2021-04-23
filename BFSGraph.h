@@ -17,11 +17,12 @@ class BFS{
         Vertex pop();
         Vertex peek() const;
         bool empty() const;
+        std::vector<int> myarr;
 
     private:
         queue<Vertex*> q;
         Vertex* Start;
         Vertex* Current;
         Graph G;
-        std::vector<vector<int> > myarr;
+        //std::vector<vector<int> > myarr;
 };

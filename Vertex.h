@@ -14,6 +14,14 @@ class Vertex {
         void setAuthor(std::string setAuthor) {this->author = setAuthor;}
 
         void addEdge(Edge* edge) { edges.push_back(edge);}
+
+        std::vector<Edge*> getAdjacent(){
+            return edges;
+        }
+
+        unsigned int getID(){
+            return id;
+        }
         
         void setID(unsigned int id) {this->id = id;}
 
