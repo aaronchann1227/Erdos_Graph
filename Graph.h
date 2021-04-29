@@ -38,11 +38,17 @@ class Graph {
         */ 
         unsigned int find(std::string author){
             for (int i=0;i<vertices.size(); i++){
-                if vertices[i]==author{
-                    return vertices[i].getID();
+                if (vertices[i] == author) {
+                    return vertices[i]->getID();
                 }
             }
             return -1;
+        }
+
+        Vertex* getRoot() {return root;}
+
+        Vertex* getVertex(std::string name) {
+            return uniqueAuthors[name];
         }
     
     private:
@@ -50,12 +56,12 @@ class Graph {
 
         std::vector< Vertex*> vertices;
 
-        vector<Edge*> edges;
+        std::vector<Edge*> edges;
 
-        unordered_map< string, Vertex*> uniqueAuthors;
+        std::unordered_map< std::string, Vertex*> uniqueAuthors;
 
         Vertex* root;
 
-        unordered_map<std::string , unsigned int> authorToPaper;
+        std::unordered_map<std::string , unsigned int> authorToPaper;
 
 };

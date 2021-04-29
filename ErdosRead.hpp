@@ -1,3 +1,4 @@
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -11,8 +12,10 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
-#pragma once
-using namespace std;
+#include <unordered_map>
+
 
 
 std::vector< std::vector<std::string> > readErdos();
+
+std::unordered_map<std::string, unsigned int> createAuthorToPaper();

@@ -15,7 +15,7 @@ class Vertex {
 
         void addEdge(Edge* edge) { edges.push_back(edge);}
 
-        std::vector<Edge*> getAdjacent(){
+        std::vector<Edge*> getEdge(){
             return edges;
         }
 
@@ -24,6 +24,8 @@ class Vertex {
         }
         
         void setID(unsigned int id) {this->id = id;}
+
+        
 
     private:
 
