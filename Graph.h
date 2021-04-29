@@ -8,13 +8,13 @@
 
 
 
-class ErdosGraph {
+class Graph {
     
     public:
         /**
         * Constructor for the Erdos Graph
         */ 
-        ErdosGraph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper);
+        Graph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper);
 
         /**
         * Abstract BFS traversal for the Erdos graph  

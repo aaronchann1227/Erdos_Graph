@@ -5,7 +5,7 @@
 //unordered_map< Vertex, vector<Edge*> > vertexMap
 // vector<Edge*> edges;
 //
-ErdosGraph::ErdosGraph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper) {
+Graph::Graph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
 
     this->authorToPaper = authorToPaper;
