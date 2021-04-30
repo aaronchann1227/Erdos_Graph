@@ -102,17 +102,157 @@ TEST_CASE("Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8", "[weight=1][pa
   REQUIRE (8 == baker->getEdge().size());
 }
 
+// 3. Check num of LARSON, JEAN ANN neighbors == 17
+TEST_CASE("Check num of LARSON, JEAN ANN neighbors == 17", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* ann = graph.getVertex("LARSON, JEAN ANN");
 
+  REQUIRE (17 == ann->getEdge().size());
+}
 
-
-
-// 3. Check num of LARSON, JEAN ANN neighbors == 17?
 // 4. Check num of Steprans, Juris neighbors == 4?
+TEST_CASE("Check num of Steprans, Juris neighbors == 4", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* juris = graph.getVertex("Steprans, Juris");
+
+  REQUIRE (4 == juris->getEdge().size());
+}
+
 // 5. Check num of Drake, Nathan neighbors == 2?
+TEST_CASE("Check num of Drake, Natha neighbors == 2", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* natha = graph.getVertex("Drake, Natha");
+
+  REQUIRE (2 == natha->getEdge().size());
+}
+
 // 6. (Erdos find leaf) case1: try the path Erdos -> ABBOTT, HARVEY LESLIE -> Zhou, Bing
+TEST_CASE("Erdos to leaf case 1", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Vertex* leslie = graph.getVertex("ABBOTT, HARVEY LESLIE");
+  Vertex* bing = graph.getVertex("Zhou, Bing");
+
+  //first edge
+  REQUIRE (root->isNeighbor("ABBOTT, HARVEY LESLIE") == true);
+  REQUIRE (leslie->isNeighbor("Erdos") == true);
+
+  //second edge
+  REQUIRE (leslie->isNeighbor("Zhou, Bing") == true);
+  REQUIRE (bing->isNeighbor("ABBOTT, HARVEY LESLIE") == true);
+}
+
 // 7. (Erdos find leaf) case2: try the path Erdos -> ASHBACHER, CHARLES D. -> Neirynck, Lori
+TEST_CASE("Erdos to leaf case 2", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Vertex* charles = graph.getVertex("ASHBACHER, CHARLES D.");
+  Vertex* lori = graph.getVertex("Neirynck, Lori");
+
+  //first edge
+  REQUIRE (root->isNeighbor("ASHBACHER, CHARLES D.") == true);
+  REQUIRE (charles->isNeighbor("Erdos") == true);
+
+  //second edge
+  REQUIRE (charles->isNeighbor("Neirynck, Lori") == true);
+  REQUIRE (lori->isNeighbor("ASHBACHER, CHARLES D.") == true);
+}
+
 // 8. (Leaf find Erdos) case1: try the path  Fraley, Chris -> BABU, GUTTI JOGESH -> Erdos
+TEST_CASE("Leaf to Erdos 1", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Vertex* chris = graph.getVertex("Fraley, Chris");
+  Vertex* jogesh = graph.getVertex("BABU, GUTTI JOGESH");
+
+  //first edge
+  REQUIRE (chris->isNeighbor("BABU, GUTTI JOGESH") == true);
+  REQUIRE (jogesh->isNeighbor("Fraley, Chris") == true);
+
+  //second edge
+  REQUIRE (jogesh->isNeighbor("Erdos") == true);
+  REQUIRE (root->isNeighbor("BABU, GUTTI JOGESH") == true);
+}
+
 // 9. (Leaf find Erdos) case2:  try the path  Bannai, Eiichi ->CAMERON, PETER JEPHSON -> Erdos
+TEST_CASE("Leaf to Erdos 2", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Vertex* eiichi = graph.getVertex("Bannai, Eiichi");
+  Vertex* jephson = graph.getVertex("CAMERON, PETER JEPHSON");
+
+  //first edge
+  REQUIRE (eiichi->isNeighbor("CAMERON, PETER JEPHSON") == true);
+  REQUIRE (jephson->isNeighbor("Bannai, Eiichi") == true);
+
+  //second edge
+  REQUIRE (jephson->isNeighbor("Erdos") == true);
+  REQUIRE (root->isNeighbor("CAMERON, PETER JEPHSON") == true);
+}
+
 // 10. (Cross path find leaf): try Erdos -> CANFIELD, EARL RODNEY -> GRANVILLE, ANDREW JAMES -> Cai, Tian Xin
+TEST_CASE("Cross path find leaf", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Vertex* rodney = graph.getVertex("CANFIELD, EARL RODNEY");
+  Vertex* james = graph.getVertex("GRANVILLE, ANDREW JAMES");
+  Vertex* xin = graph.getVertex("Cai, Tian Xin");
+
+  //first edge
+  REQUIRE (root->isNeighbor("CANFIELD, EARL RODNEY") == true);
+  REQUIRE (rodney->isNeighbor("Erdos") == true);
+
+  //second edge
+  REQUIRE (rodney->isNeighbor("GRANVILLE, ANDREW JAMES") == true);
+  REQUIRE (james->isNeighbor("CANFIELD, EARL RODNEY") == true);
+
+  //third edge
+  REQUIRE (james->isNeighbor("Cai, Tian Xin") == true);
+  REQUIRE (xin->isNeighbor("GRANVILLE, ANDREW JAMES") == true);
+}
+
 // 11. (Complicated Cross path Erdos cycle): Erdos -> GUNDERSON, DAVID SHANE -> HINDMAN, NEIL BRUCE -> Farah, Ilijas -> MAGIDOR, MENACHEM -> Erdos
+TEST_CASE("Cross path find leaf", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Vertex* shane = graph.getVertex("GUNDERSON, DAVID SHANE");
+  Vertex* bruce = graph.getVertex("HINDMAN, NEIL BRUCE");
+  Vertex* ilijas = graph.getVertex("Farah, Ilijas");
+  Vertex* menachem = graph.getVertex("MAGIDOR, MENACHEM");
+
+  //first edge
+  REQUIRE (root->isNeighbor("GUNDERSON, DAVID SHANE") == true);
+  REQUIRE (shane->isNeighbor("Erdos") == true);
+
+  //second edge
+  REQUIRE (shane->isNeighbor("HINDMAN, NEIL BRUCE") == true);
+  REQUIRE (bruce->isNeighbor("GUNDERSON, DAVID SHANE") == true);
+
+  //third edge
+  REQUIRE (bruce->isNeighbor("Farah, Ilijas") == true);
+  REQUIRE (ilijas->isNeighbor("HINDMAN, NEIL BRUCE") == true);
+
+  //fourth edge
+  REQUIRE (ilijas->isNeighbor("MAGIDOR, MENACHEM") == true);
+  REQUIRE (menachem->isNeighbor("Farah, Ilijas") == true);
+
+  //fifth edge
+  REQUIRE (root->isNeighbor("MAGIDOR, MENACHEM") == true);
+  REQUIRE (menachem->isNeighbor("Erdos") == true);
+}
+
 // 12. Check weight of HALL, RICHARD ROXBY == formula(14)
+TEST_CASE("Check weight 1", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Edge* roxbyEdge = root->getEdge("HALL, RICHARD ROXBY");
+  REQUIRE (roxbyEdge->weight == 1 / (2 * 14));
+}
+
+// 13. Check weight of SZEMEREDI, ENDRE == formula(29)
+TEST_CASE("Check weight 2", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
+  Vertex* root = graph.getRoot();
+  Edge* endreEdge = root->getEdge("SZEMEREDI, ENDRE");
+  REQUIRE (endreEdge->weight == 1 / (2 * 29));
+}

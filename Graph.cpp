@@ -66,7 +66,7 @@ unsigned int Graph::getSize() {
     return vertices.size();
 }
 
-unsigned int Graph::find(std::string author) {
+unsigned int Graph::findID(std::string author) {
     for (int i = 0; i < vertices.size(); i++){
         if (vertices[i] == author) {
             return vertices[i]->getID();

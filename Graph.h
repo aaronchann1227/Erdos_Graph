@@ -35,7 +35,7 @@ class Graph {
         /**
         * custom method for finding the ID of a vertex with author name and then returning the respective ID
         */ 
-        unsigned int find(std::string author);
+        unsigned int findID(std::string author);
 
         /**
         * method that return the root of the graph, aka Edros.
