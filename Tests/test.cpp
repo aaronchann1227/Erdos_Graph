@@ -87,16 +87,32 @@ Graph makeGraph() {
   return graph;
 }
 
-
+// 1. Check number of Edros’s neighbors == 512
 TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   REQUIRE (512 == root->getEdge().size());
 }
 
+// 2. Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8
 TEST_CASE("Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* baker = graph.getVertex("LACAMPAGNE, CAROLE BAKER");
 
   REQUIRE (8 == baker->getEdge().size());
 }
+
+
+
+
+
+// 3. Check num of LARSON, JEAN ANN neighbors == 17?
+// 4. Check num of Steprans, Juris neighbors == 4?
+// 5. Check num of Drake, Nathan neighbors == 2?
+// 6. (Erdos find leaf) case1: try the path Erdos -> ABBOTT, HARVEY LESLIE -> Zhou, Bing
+// 7. (Erdos find leaf) case2: try the path Erdos -> ASHBACHER, CHARLES D. -> Neirynck, Lori
+// 8. (Leaf find Erdos) case1: try the path  Fraley, Chris -> BABU, GUTTI JOGESH -> Erdos
+// 9. (Leaf find Erdos) case2:  try the path  Bannai, Eiichi ->CAMERON, PETER JEPHSON -> Erdos
+// 10. (Cross path find leaf): try Erdos -> CANFIELD, EARL RODNEY -> GRANVILLE, ANDREW JAMES -> Cai, Tian Xin
+// 11. (Complicated Cross path Erdos cycle): Erdos -> GUNDERSON, DAVID SHANE -> HINDMAN, NEIL BRUCE -> Farah, Ilijas -> MAGIDOR, MENACHEM -> Erdos
+// 12. Check weight of HALL, RICHARD ROXBY == formula(14)

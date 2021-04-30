@@ -4,14 +4,13 @@
 #include <Vertex.h>
 
 class Edge {
-
-
-    Edge(std::string setV1, Vertex setV2, double setWeight) {
-        vertex1 = setV1;
-        vertex2 = setV2;
-        weight = setWeight;
-    }
-    
-    Vertex vertex1, vertex2;
-    double weight;
+    public:
+        Edge(std::string setV1, Vertex setV2, double setWeight) {
+            vertex1 = setV1;
+            vertex2 = setV2;
+            weight = setWeight;
+        }
+        
+        Vertex vertex1, vertex2;
+        double weight;
 };

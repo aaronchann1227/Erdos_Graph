@@ -5,11 +5,7 @@
 #include "Edge.h"
 #include "Vertex.h"
 
-
-
-
 class Graph {
-    
     public:
         /**
         * Constructor for the Erdos Graph
@@ -25,43 +21,40 @@ class Graph {
         * find method that uses dijkstra's algorithm to find a path between two vertices
         */
         std::vector<Edge*> dijkstraFind(const Vertex v1, const Vertex v2) const;
-        unsigned int getSize(){
-            return vertices.size();
-        }
+
+        /**
+        * method that return the number of vertices of the graph.
+        */ 
+        unsigned int getSize();
+
         /**
         * custom printing method for visualizing the path
         */ 
         std::vector<std::string> printPath(std::vector<Edge*> path);
 
         /**
-        * custom method for finding a vertex with author name and then returning the respective ID
+        * custom method for finding the ID of a vertex with author name and then returning the respective ID
         */ 
-        unsigned int find(std::string author){
-            for (int i=0;i<vertices.size(); i++){
-                if (vertices[i] == author) {
-                    return vertices[i]->getID();
-                }
-            }
-            return -1;
-        }
+        unsigned int find(std::string author);
 
-        Vertex* getRoot() {return root;}
+        /**
+        * method that return the root of the graph, aka Edros.
+        */ 
+        Vertex* getRoot();
 
-        Vertex* getVertex(std::string name) {
-            return uniqueAuthors[name];
-        }
+        /**
+        * return the Vertex given the name of the Mathematician.
+        */ 
+        Vertex* getVertex(std::string name);
     
     private:
-        //Vertex* head;
-
-        std::vector< Vertex*> vertices;
-
-        std::vector<Edge*> edges;
-
-        std::unordered_map< std::string, Vertex*> uniqueAuthors;
-
         Vertex* root;
 
-        std::unordered_map<std::string , unsigned int> authorToPaper;
+        std::vector< Vertex* > vertices;
 
+        std::vector< Edge* > edges;
+
+        std::unordered_map< std::string, Vertex* > uniqueAuthors;
+
+        std::unordered_map< std::string , unsigned int > authorToPaper;
 };

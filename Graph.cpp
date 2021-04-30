@@ -1,5 +1,3 @@
-// implementation
-
 #include "Graph.h"
 
 //unordered_map< Vertex, vector<Edge*> > vertexMap
@@ -7,8 +5,8 @@
 //
 Graph::Graph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
-
     this->authorToPaper = authorToPaper;
+    /////////////////Need to create vertex first
     root->setAuthor("Erdos");
     root->setID(0);
     vertices.push_back(&root);
@@ -19,8 +17,10 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std
     unsigned int idCounter = 1;
     for (size_t i = 0; i < erdosVec.size(); i++) {
         for (size_t j = 1; j < erdosVec[i].size(); j++) {
-            Vertex author(erdosVec[i][j]);
-            if (uniqueAuthors.find(erdosVec[i][j]) == uniqueAuthors.end() ) {
+
+            if ( uniqueAuthors.find(erdosVec[i][j]) == uniqueAuthors.end() ) {
+                Vertex author(erdosVec[i][j]);
+                
                 author.setID(idCounter);
                 uniqueAuthors[erdosVec[i][j]] = &author;
                 //Initializes a vector of Vertex pointers to each unique author
@@ -44,20 +44,41 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std
             publications = authorToPaper[erdosVec[i][0]];
             weight = 1 / (2 * publications);
         }
+        
         Edge erdosToErdos1("Erdos", erdos1->getAuthor(), weight);
+        //adding edge for Erdos and Erdos1
         root->addEdge(&erdosToErdos1);
         erdos1->addEdge(&erdosToErdos1);
+
         for (size_t j = 1; j < erdosVec[i].size(); j++) {
-            Vertex* erdo2(uniqueAuthors[erdosVec[i][j]]);
+            Vertex* erdos2 = uniqueAuthors[erdosVec[i][j]];
 
             //An edge will always have the following format:
             // Edge (name of whoever is closer to Erdos, name of second person, weight)
             Edge edge(erdos1->getAuthor(), erdos2->getAuthor(), 1.0);
             erdos1->addEdge(&edge);
             erdos2->addEdge(&edge);
-
         }
-
     }
 }
 
+unsigned int Graph::getSize() {
+    return vertices.size();
+}
+
+unsigned int Graph::find(std::string author) {
+    for (int i = 0; i < vertices.size(); i++){
+        if (vertices[i] == author) {
+            return vertices[i]->getID();
+        }
+    }
+    return -1;
+}
+
+Vertex* Graph::getRoot() {
+    return root;
+}
+
+Vertex* Graph::getVertex(std::string name) {
+    return uniqueAuthors[name];
+}
