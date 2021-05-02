@@ -70,12 +70,15 @@ std::unordered_map<std::string, unsigned int> createAuthorToPaper() {
 
   size_t pos = 0;
   std::string token;
+
   while ((pos = authors.find(delimiter)) != std::string::npos) {
       token = authors.substr(0, pos);
       out.push_back(token);
       authors.erase(0, pos + delimiter.length());
   }
+
   std::unordered_map<std::string , unsigned int> authorToPaper;
+
   for (size_t i = 0; i < out.size(); i += 2) {
       authorToPaper[out[i]] = std::stoi(out[i + 1]); 
   }
@@ -89,13 +92,16 @@ Graph makeGraph() {
 
 // 1. Check number of Edros’s neighbors == 512
 TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
+
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   REQUIRE (512 == root->getEdge().size());
+
 }
 
 // 2. Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8
 TEST_CASE("Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8", "[weight=1][part=1]") {
+  
   Graph graph = makeGraph();
   Vertex* baker = graph.getVertex("LACAMPAGNE, CAROLE BAKER");
 

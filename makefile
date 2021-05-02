@@ -22,12 +22,11 @@ output_msg: ; $(CLANG_VERSION_MSG)
 
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
+#readFromFile.o: main.cpp
+	#$(CXX) $(CXXFLAGS) main.cpp
 
-readFromFile.o: main.cpp readFromFile.cpp
-	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
-
-#test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp
-#	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp $(LDFLAGS) -o test
+test: output_msg catch/catchmain.cpp Tests/tests.cpp
+	$(LD) catch/catchmain.cpp Tests/tests.cpp$(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test
