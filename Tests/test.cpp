@@ -1,4 +1,4 @@
-#include "../Catch/catch.hpp"
+#include "../catch/catch.hpp"
 #include "../Graph.h"
 #include "../Graph.h"
 #include <iostream>
