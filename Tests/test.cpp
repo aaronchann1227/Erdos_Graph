@@ -90,6 +90,20 @@ Graph makeGraph() {
   return graph;
 }
 
+//0. Test BFS
+
+// TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
+//   Graph graph=makeGraph();
+//   Vertex* Erdos = graph.getRoot();
+//   Traversal Traversal(graph, Erdos);
+
+//   bfs.add( Arthur Benjamin );
+//   bfs.add( Manjul Bhargava );
+//   bfs.add( Bruce Reznick );
+
+//   REQUIRE( *Traversal == Erdos );
+// } 
+
 // 1. Check number of Edros’s neighbors == 512
 TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
 
