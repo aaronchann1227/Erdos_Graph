@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#include "Edge.h"
 
 class Vertex {
     public:
@@ -24,7 +24,7 @@ class Vertex {
         void setID(unsigned int id) {this->id = id;}
 
         bool isNeighbor(std::string author) {
-            result = false;
+            bool result = false;
             for (unsigned i = 0; i < edges.size(); ++i) {
                 if ((edges[i]->vertex1 == author) ||  (edges[i]->vertex2 == author)) {
                     result = true;

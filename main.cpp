@@ -12,10 +12,12 @@
 #include <iomanip>
 #include <unordered_map>
 #include "ErdosRead.hpp"
+#include "Graph.h"
 
 using namespace std;
 
 int main() {
+    //Graph graph;
     // vector< vector<string> > erdosVec = readErdos();
 
     // cout << erdosVec[0][1];

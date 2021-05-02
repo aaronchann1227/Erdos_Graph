@@ -3,13 +3,13 @@
 //unordered_map< Vertex, vector<Edge*> > vertexMap
 // vector<Edge*> edges;
 //
-Graph::Graph(std::vector< std::vector<std::string> > erdosVec, unordered_map<std::string , unsigned int> authorToPaper) {
+Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
     this->authorToPaper = authorToPaper;
     /////////////////Need to create vertex first
     root->setAuthor("Erdos");
     root->setID(0);
-    vertices.push_back(&root);
+    vertices.push_back(root);
 
     //Traverses through the erdosVec the first time while initializing an
     //unordered map that is filled with all of the unique author names in erdosVec
@@ -68,7 +68,7 @@ unsigned int Graph::getSize() {
 
 unsigned int Graph::findID(std::string author) {
     for (int i = 0; i < vertices.size(); i++){
-        if (vertices[i] == author) {
+        if (vertices[i]->getAuthor() == author) {
             return vertices[i]->getID();
         }
     }
