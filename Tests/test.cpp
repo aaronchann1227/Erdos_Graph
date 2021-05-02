@@ -218,7 +218,7 @@ TEST_CASE("Cross path find leaf", "[weight=1][part=1]") {
 }
 
 // 11. (Complicated Cross path Erdos cycle): Erdos -> GUNDERSON, DAVID SHANE -> HINDMAN, NEIL BRUCE -> Farah, Ilijas -> MAGIDOR, MENACHEM -> Erdos
-TEST_CASE("Cross path find leaf", "[weight=1][part=1]") {
+TEST_CASE("Cross path find leaf2", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* shane = graph.getVertex("GUNDERSON, DAVID SHANE");

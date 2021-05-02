@@ -2,7 +2,7 @@
 EXENAME = Erdos
 
 # Object Types
-OBJS = main.o
+OBJS = Graph.o main.o
 
 # Compilation Flags
 CXX = clang++
@@ -22,11 +22,12 @@ output_msg: ; $(CLANG_VERSION_MSG)
 
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
-#readFromFile.o: main.cpp
-	#$(CXX) $(CXXFLAGS) main.cpp
 
-test: output_msg catch/catchmain.cpp Tests/test.cpp
-	$(LD) catch/catchmain.cpp Tests/test.cpp $(LDFLAGS) -o test
+Graph.o: main.cpp Graph.cpp
+	$(CXX) $(CXXFLAGS) main.cpp Graph.cpp
+
+test: output_msg catch/catchmain.cpp Tests/test.cpp Graph.cpp
+	$(LD) catch/catchmain.cpp Tests/test.cpp Graph.cpp $(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test
