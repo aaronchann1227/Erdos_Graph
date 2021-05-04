@@ -1,6 +1,4 @@
 #include <iterator>
-#include "BFSGraph.h"
-#include "BFSGraph.cpp"
 #include <vector>
 #include "Traversal.h"
 
@@ -41,7 +39,7 @@ Traversal::operator++(){
     }
     if ((!BFS.empty())){
       BFS.myarr[curr->getID]=1;
-      BFS.pop();
+      //BFS.pop();
     }
 }
 

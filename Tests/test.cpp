@@ -1,5 +1,6 @@
 #include "../catch/catch.hpp"
 #include "../Graph.h"
+#include "../Traversal.h"
 
 #include <iostream>
 #include <fstream>
@@ -103,6 +104,54 @@ Graph makeGraph() {
 
 //   REQUIRE( *Traversal == Erdos );
 // } 
+
+TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
+  Graph graph=makeGraph();
+  Vertex* Erdos = graph.getRoot();
+  Traversal Traversal(graph, Erdos);
+
+  REQUIRE( *Traversal == Erdos );
+}
+
+TEST_CASE("BFS operator++", "[weight=0][part=1][part=1b]") {
+  Graph graph=makeGraph();
+  Vertex* Erdos = graph.getRoot();
+  Traversal Traversal(graph, Erdos);
+
+  REQUIRE( *Traversal == Erdos );
+  Traversal++;
+  REQUIRE( *Traversal->getAuthor() == "ABBOTT, HARVEY LESLIE" );
+  //REQUIRE( Traversal++ == "ACZEL, JANOS DEZSO" );
+}
+
+TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][part=1][part=1b]") {
+  Graph graph=makeGraph();
+  Vertex* Erdos = graph.getRoot();
+  Traversal Traversal(graph, Erdos);
+  bool check=false;
+
+  REQUIRE( *Traversal == Erdos );
+  while (!Traversal.T_done()){
+    Traversal++;
+    if (*Traversal==Erdos){
+      check=true;
+    }
+  }
+  REQUIRE( check == false );
+}
+
+TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=0][part=1][part=1b]") {
+  Graph graph=makeGraph();
+  Vertex* Erdos = graph.getRoot();
+  Traversal Traversal(graph, Erdos);
+  int count=0;
+  while (!Traversal.T_done()){
+    Traversal++;
+    count+=1;
+  }
+  REQUIRE( count + 1 == graph.getSize() );
+}
+
 
 // 1. Check number of Edros’s neighbors == 512
 TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
