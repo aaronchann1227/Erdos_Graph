@@ -1,5 +1,5 @@
 #include "Graph.h"
-
+#include <iostream>
 //unordered_map< Vertex, vector<Edge*> > vertexMap
 // vector<Edge*> edges;
 //
@@ -20,7 +20,7 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
 
             if ( uniqueAuthors.find(erdosVec[i][j]) == uniqueAuthors.end() ) {
                 Vertex author(erdosVec[i][j]);
-                
+                std::cout << "line 23" << std::endl;
                 author.setID(idCounter);
                 uniqueAuthors[erdosVec[i][j]] = &author;
                 //Initializes a vector of Vertex pointers to each unique author
@@ -33,10 +33,11 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
     //Initializes the edge vectors inside each Vertex inside the graph
     for (size_t i = 0; i < erdosVec.size(); i++) {
         Vertex* erdos1 = uniqueAuthors[erdosVec[i][0]];
-        //
+        std::cout << "line 36" << std::endl;
+
         //  1/(n(a,b)/[(erd(a)+erd(b))/2])
         //
-        //An edge will always have the following format:
+        // An edge will always have the following format:
         // Edge (name of whoever is closer to Erdos, name of second person, weight)
         double weight = 1;
         unsigned int publications = 1;
@@ -52,7 +53,7 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
 
         for (size_t j = 1; j < erdosVec[i].size(); j++) {
             Vertex* erdos2 = uniqueAuthors[erdosVec[i][j]];
-
+            std::cout << "line 56" << std::endl;
             //An edge will always have the following format:
             // Edge (name of whoever is closer to Erdos, name of second person, weight)
             Edge edge(erdos1->getAuthor(), erdos2->getAuthor(), 1.0);
@@ -67,7 +68,7 @@ unsigned int Graph::getSize() {
 }
 
 unsigned int Graph::findID(std::string author) {
-    for (int i = 0; i < vertices.size(); i++){
+    for (size_t i = 0; i < vertices.size(); i++){
         if (vertices[i]->getAuthor() == author) {
             return vertices[i]->getID();
         }

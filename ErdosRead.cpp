@@ -39,14 +39,19 @@ std::vector<std::vector<std::string>> readErdos() {
     out.push_back("end123");
 
     std::vector< std::vector<std::string> > erdosVec;
-    erdosVec.resize(513, std::vector<std::string> (0));
+    erdosVec.resize(512, std::vector<std::string> (0));
 
     unsigned count = 0;
+    unsigned counter2 = 0;
+
     for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i) {
+        
         while (*i != "end123") {
             erdosVec[count].push_back(*i);
             ++i;
+            if ( i == out.end() ) {break;}
         }
+        if (i == out.end() ) {break;}
         count++;
     }
 

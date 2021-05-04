@@ -1,6 +1,6 @@
 #include "../catch/catch.hpp"
 #include "../Graph.h"
-#include "../Traversal.h"
+//#include "../Traversal.h"
 
 #include <iostream>
 #include <fstream>
@@ -24,36 +24,44 @@ std::vector<std::vector<std::string>> readErdos() {
 		strStream << text.rdbuf();
 	}
 
-    std::string authors = strStream.str();
+  std::string authors = strStream.str();
 
-    std::vector<std::string> out;
-    std::string delimiter = "&";
+  std::vector<std::string> out;
+  std::string delimiter = "&";
 
-    size_t pos = 0;
-    std::string token;
-    while ((pos = authors.find(delimiter)) != std::string::npos) {
-        token = authors.substr(0, pos);
-        out.push_back(token);
-        authors.erase(0, pos + delimiter.length());
-    }
+  size_t pos = 0;
+  std::string token;
+  while ((pos = authors.find(delimiter)) != std::string::npos) {
+      token = authors.substr(0, pos);
+      out.push_back(token);
+      authors.erase(0, pos + delimiter.length());
+  }
 
-    out[0].erase(0,1);
+  //out[0].erase(0,1);
 
-    out.push_back("end123");
+  out.push_back("end123");
 
-    std::vector< std::vector<std::string> > erdosVec;
-    erdosVec.resize(513, std::vector<std::string> (0));
+  std::vector< std::vector<std::string> > erdosVec;
+  erdosVec.resize(512, std::vector<std::string> (0));
 
-    unsigned count = 0;
-    for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i) {
-        while (*i != "end123") {
+  unsigned count = 0;
+  for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i) {
+      while (*i != "end123") {
             erdosVec[count].push_back(*i);
             ++i;
+            if ( i == out.end() ) {break;}
         }
+        if (i == out.end() ) {break;}
+        //std::cout << count << "\n";
         count++;
-    }
+        if (count == 512) {
+            //cout << "line 61";
+            break;
+        }
+        //std::cout << "line 60" << "\n";
+  }
 
-    return erdosVec;
+  return erdosVec;
 }
 
 std::unordered_map<std::string, unsigned int> createAuthorToPaper() {
@@ -82,6 +90,8 @@ std::unordered_map<std::string, unsigned int> createAuthorToPaper() {
 
   for (size_t i = 0; i < out.size(); i += 2) {
       authorToPaper[out[i]] = std::stoi(out[i + 1]); 
+      std::cout << "line 88, createAuthorToPaper";
+
   }
   return authorToPaper;
 }
@@ -105,52 +115,52 @@ Graph makeGraph() {
 //   REQUIRE( *Traversal == Erdos );
 // } 
 
-TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
-  Graph graph=makeGraph();
-  Vertex* Erdos = graph.getRoot();
-  Traversal Traversal(graph, Erdos);
+// TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
+//   Graph graph = makeGraph();
+//   Vertex* Erdos = graph.getRoot();
+//   Traversal Traversal(graph, Erdos);
 
-  REQUIRE( *Traversal == Erdos );
-}
+//   REQUIRE( *Traversal == Erdos );
+// }
 
-TEST_CASE("BFS operator++", "[weight=0][part=1][part=1b]") {
-  Graph graph=makeGraph();
-  Vertex* Erdos = graph.getRoot();
-  Traversal Traversal(graph, Erdos);
+// TEST_CASE("BFS operator++", "[weight=0][part=1][part=1b]") {
+//   Graph graph=makeGraph();
+//   Vertex* Erdos = graph.getRoot();
+//   Traversal Traversal(graph, Erdos);
 
-  REQUIRE( *Traversal == Erdos );
-  Traversal++;
-  REQUIRE( *Traversal->getAuthor() == "ABBOTT, HARVEY LESLIE" );
-  //REQUIRE( Traversal++ == "ACZEL, JANOS DEZSO" );
-}
+//   REQUIRE( *Traversal == Erdos );
+//   Traversal++;
+//   REQUIRE( *Traversal->getAuthor() == "ABBOTT, HARVEY LESLIE" );
+//   //REQUIRE( Traversal++ == "ACZEL, JANOS DEZSO" );
+// }
 
-TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][part=1][part=1b]") {
-  Graph graph=makeGraph();
-  Vertex* Erdos = graph.getRoot();
-  Traversal Traversal(graph, Erdos);
-  bool check=false;
+// TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][part=1][part=1b]") {
+//   Graph graph=makeGraph();
+//   Vertex* Erdos = graph.getRoot();
+//   Traversal Traversal(graph, Erdos);
+//   bool check=false;
 
-  REQUIRE( *Traversal == Erdos );
-  while (!Traversal.T_done()){
-    Traversal++;
-    if (*Traversal==Erdos){
-      check=true;
-    }
-  }
-  REQUIRE( check == false );
-}
+//   REQUIRE( *Traversal == Erdos );
+//   while (!Traversal.T_done()){
+//     Traversal++;
+//     if (*Traversal==Erdos){
+//       check=true;
+//     }
+//   }
+//   REQUIRE( check == false );
+// }
 
-TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=0][part=1][part=1b]") {
-  Graph graph=makeGraph();
-  Vertex* Erdos = graph.getRoot();
-  Traversal Traversal(graph, Erdos);
-  int count=0;
-  while (!Traversal.T_done()){
-    Traversal++;
-    count+=1;
-  }
-  REQUIRE( count + 1 == graph.getSize() );
-}
+// TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=0][part=1][part=1b]") {
+//   Graph graph=makeGraph();
+//   Vertex* Erdos = graph.getRoot();
+//   Traversal Traversal(graph, Erdos);
+//   int count=0;
+//   while (!Traversal.T_done()){
+//     Traversal++;
+//     count+=1;
+//   }
+//   REQUIRE( count + 1 == graph.getSize() );
+// }
 
 
 // 1. Check number of Edros’s neighbors == 512

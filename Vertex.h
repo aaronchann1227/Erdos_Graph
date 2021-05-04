@@ -5,7 +5,7 @@
 
 class Vertex {
     public:
-        Vertex(std::string author) : author(author) {}
+        Vertex(std::string& author) : author(author) {}
 
         std::string getAuthor() { return author; }
 
