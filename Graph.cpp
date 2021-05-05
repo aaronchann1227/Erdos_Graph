@@ -81,6 +81,16 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
     }
 }
 
+Graph::~Graph() {
+    for (unsigned j = 0; j < edges.size(); j++) {
+        delete edges[j];
+    }
+
+    for (unsigned i = 0; i < vertices.size(); i++) {
+        delete vertices[i];
+    }
+}
+
 unsigned int Graph::getSize() {
     return vertices.size();
 }

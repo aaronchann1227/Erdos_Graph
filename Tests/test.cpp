@@ -208,7 +208,6 @@ TEST_CASE("Check num of Steprans, Juris neighbors == 4", "[weight=1][part=1]") {
 TEST_CASE("Check num of Drake, Nathan neighbors == 2", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* natha = graph.getVertex("Drake, Nathan");
-  cout << natha->getAuthor();
   REQUIRE (2 == natha->getEdge().size());
 }
 

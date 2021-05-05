@@ -13,6 +13,11 @@ class Graph {
         Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper);
 
         /**
+        * Destructor for the Erdos Graph
+        */ 
+        ~Graph();
+        
+        /**
         * Abstract BFS traversal for the Erdos graph  
         */ 
         void ErdosBFS(Vertex* target) const;
