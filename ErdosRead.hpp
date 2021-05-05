@@ -14,8 +14,6 @@
 #include <iomanip>
 #include <unordered_map>
 
-
-
 std::vector< std::vector<std::string> > readErdos();
 
 std::unordered_map<std::string, unsigned int> createAuthorToPaper();

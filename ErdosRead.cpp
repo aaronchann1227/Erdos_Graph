@@ -58,8 +58,6 @@ std::vector<std::vector<std::string>> readErdos() {
         //std::cout << "line 60" << "\n";
   }
   
-  //getting a bug that the last line of file is not being parsed -- manual insert
-  // erdosVec[513] = vector<string>{string("ZIV, ABRAHAM"),string("Aharoni, Merav"),string("Amdursky, Vardy"),string("Asaf, Sigal"),string("Fournier, Laurent"),string("Gal, Shmuel"), string("GINZBURG, ABRAHAM"),string("Maharik, Ron"),string("Nehama, Ilan"),string("Nikulshin, Ilya"),string("Rubinstein, Reuven Y.")};
   return erdosVec;
 }
 
