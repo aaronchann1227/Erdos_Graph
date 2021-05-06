@@ -5,14 +5,14 @@
 #include <stack>
 #include <queue>
 //#include "Graph.cpp"
-//#include "Graph.h"
+#include "Graph.h"
 #include "BFSGraph.h"
 using namespace std;
 
 /**
  * BFS Constructor that takes in a reference to a graph and a starting vertex pointer.
  */
-BFS::BFS(const Graph & input_graph, Vertex* start) : G(input_graph) {  
+BFS::BFS(Graph & input_graph, Vertex* start) : G(input_graph) {  
   Start=start;
   q.push(Start);
   myarr.resize(G.getSize());

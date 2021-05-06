@@ -3,6 +3,7 @@
 #include "../ErdosRead.hpp"
 #include "../ErdosRead.cpp"
 #include "../Traversal.h"
+#include "../Traversal.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -20,19 +21,22 @@
 using namespace std;
 
 Graph makeGraph() {
-  std::cout << " enter makeGraph()" << std::endl;
+  //std::cout << " enter makeGraph()" << std::endl;
   Graph graph(readErdos(), createAuthorToPaper());
   return graph;
 }
 
 //0. Test BFS
-// TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
-//   Graph graph = makeGraph();
-//   Vertex* Erdos = graph.getRoot();
-//   Traversal traversal(graph, Erdos);
+TEST_CASE("BFS maintains the correct point on top", "[weight=1][part=1]") {
+  Graph graph = makeGraph();
 
-//   REQUIRE( *traversal == Erdos );
-// }
+  Vertex* erdos = graph.getRoot();
+  Traversal traversal(graph, erdos);
+
+  REQUIRE( erdos->getAuthor() == (*traversal)->getAuthor());
+  REQUIRE (1 == 1);
+  cout << "print line 38";
+}
 
 // TEST_CASE("BFS operator++", "[weight=0][part=1][part=1b]") {
 //   Graph graph=makeGraph();

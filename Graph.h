@@ -15,7 +15,8 @@ class Graph {
         /**
         * Destructor for the Erdos Graph
         */ 
-        ~Graph();
+        /*TODO*/
+        //~Graph();
         
         /**
         * Abstract BFS traversal for the Erdos graph  

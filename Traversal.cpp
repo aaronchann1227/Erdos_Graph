@@ -8,7 +8,7 @@ using namespace std;
  * Traversal Constructor that takes in a reference to a graph and a starting vertex pointer.
  */
 
-Traversal::Traversal(const Graph & input_graph, Vertex* start) : bfs(BFS(input_graph, start)) {}
+Traversal::Traversal(Graph & input_graph, Vertex* start) : bfs{BFS(input_graph, start)} {}
 
 /**
  * Traversal operator ++ that adds neighbors of current vertex into the traversal and visits current vertex.
