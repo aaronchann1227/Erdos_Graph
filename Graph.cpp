@@ -1,10 +1,10 @@
 #include "Graph.h"
 #include <iostream>
 using namespace std;
-
-Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
+void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
-    this->authorToPaper = authorToPaper;
+    this->authorToPaper_ = authorToPaper;
+    this->erdosVec_ = erdosVec;
     string authorErdos = "Erdos";
     Vertex* setRoot = new Vertex(authorErdos);
     //root->setAuthor("Erdos");
@@ -31,24 +31,16 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
             }
         }
     }
-    // for(unsigned i = 0; i < erdosVec.size(); ++i) {
-    //     std::cout << "Key: " << erdosVec[i][0] << std::endl;
-    // }
-
-    //cout << "look" << ( uniqueAuthors.find("ALAOGLU, LEONIDAS") == uniqueAuthors.end() ) << endl;
-
-    //std::cout << "print" << uniqueAuthors["ALAOGLU, LEONIDAS:"]->getAuthor() << std::endl;
+    
     //Initializes the edge vectors inside each Vertex inside the graph
     unsigned count = 0;
     for (size_t i = 0; i < erdosVec.size(); i++) {
         Vertex* erdos1 = uniqueAuthors[erdosVec[i][0]];
-        //std::cout << " at line 36 " << erdosVec[i][0] << std::endl;
-        //cout << count << std::endl;
         count++;
-        //  1/(n(a,b)/[(erd(a)+erd(b))/2])
+        //  Formula for the edge weight: 1/(n(a,b)/[(erd(a)+erd(b))/2])
         //
-        // An edge will always have the following format:
-        // Edge (name of whoever is closer to Erdos, name of second person, weight)
+        //  An edge will always have the following format:
+        //  Edge (name of whoever is closer to Erdos, name of second person, weight)
         double weight = 1;
         unsigned int publications = 1;
         if (authorToPaper.find(erdosVec[i][0]) != authorToPaper.end() ) {
@@ -56,10 +48,8 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
             weight = 1 / (2 * publications);
         }
 
-        //cout << "enter " << erdos1->getAuthor() << " line 59" << endl;
         Edge* erdosToErdos1 = new Edge("Erdos", erdos1->getAuthor(), weight);
         wholeEdges.push_back(erdosToErdos1);
-        //Edge erdosToErdos1("Erdos", erdos1->getAuthor(), weight);
         
         //adding edge for Erdos and Erdos1
         root->addEdge(erdosToErdos1);
@@ -67,32 +57,35 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
 
         for (size_t j = 1; j < erdosVec[i].size(); j++) {
             Vertex* erdos2 = uniqueAuthors[erdosVec[i][j]];
-            //std::cout << "line 56" << std::endl;
-            //An edge will always have the following format:
+            // An edge will always have the following format:
             // Edge (name of whoever is closer to Erdos, name of second person, weight)
             Edge* edge = new Edge(erdos1->getAuthor(), erdos2->getAuthor(), 1.0);
             wholeEdges.push_back(edge);
-            //Edge edge(erdos1->getAuthor(), erdos2->getAuthor(), 1.0);
             erdos1->addEdge(edge);
             erdos2->addEdge(edge);
         }
     }
 }
+Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
+    constructGraphHelper(erdosVec, authorToPaper);
+}
 
 void Graph::_copy(Graph const & other) {
     // Clear self
     _delete();
-
+    constructGraphHelper(other.erdosVec_, other.authorToPaper_);
     
 }
 
 void Graph::_delete() {
     for (unsigned j = 0; j < wholeEdges.size(); j++) {
-        delete wholeEdges[j];
+        if (wholeEdges[j] != NULL)
+            delete wholeEdges[j];
     }
 
     for (unsigned i = 0; i < vertices.size(); i++) {
-        delete vertices[i];
+        if (vertices[i] != NULL)
+            delete vertices[i];
     }
 }
 

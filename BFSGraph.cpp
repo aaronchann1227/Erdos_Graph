@@ -12,7 +12,7 @@ using namespace std;
 /**
  * BFS Constructor that takes in a reference to a graph and a starting vertex pointer.
  */
-BFS::BFS(Graph & input_graph, Vertex* start) : G(input_graph) {  
+BFS::BFS(Graph input_graph, Vertex* start) : G(input_graph) {  
   Start=start;
   q.push(Start);
   myarr.resize(G.getSize());

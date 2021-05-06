@@ -8,7 +8,7 @@
 using namespace std;
 class Traversal {
     public:
-        Traversal(Graph & input_graph, Vertex* start);
+        Traversal(Graph  input_graph, Vertex* start);
         void operator++();
         Vertex* operator*();
         bool T_done();

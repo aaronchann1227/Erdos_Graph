@@ -7,6 +7,8 @@
 
 class Graph {
     public:
+
+        void constructGraphHelper(std::vector<std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper);
         /**
         * Constructor for the Erdos Graph
         */ 
@@ -37,7 +39,6 @@ class Graph {
         */
         void _delete() ;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
         // /**
         // * Abstract BFS traversal for the Erdos graph  
         // */ 
@@ -92,10 +93,9 @@ class Graph {
 
         std::unordered_map< std::string, Vertex* > uniqueAuthors;
 
-        std::unordered_map< std::string , unsigned int > authorToPaper;
+        std::unordered_map< std::string , unsigned int > authorToPaper_;
 
 
         std::vector< std::vector<std::string> > erdosVec_;
 
-        std::unordered_map<std::string , unsigned int> authorToPaper_;
 };

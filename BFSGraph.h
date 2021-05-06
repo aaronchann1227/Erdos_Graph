@@ -12,7 +12,7 @@
 using namespace std;
 class BFS{
     public:
-        BFS(Graph & input_graph, Vertex* start);
+        BFS(Graph input_graph, Vertex* start);
         void add(Vertex* math_);
         Vertex* pop();
         Vertex* peek() const;
