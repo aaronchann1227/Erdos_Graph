@@ -2,7 +2,7 @@
 #include "../Graph.h"
 #include "../ErdosRead.hpp"
 #include "../ErdosRead.cpp"
-//#include "../Traversal.h"
+#include "../Traversal.h"
 
 #include <iostream>
 #include <fstream>
@@ -29,9 +29,9 @@ Graph makeGraph() {
 // TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
 //   Graph graph = makeGraph();
 //   Vertex* Erdos = graph.getRoot();
-//   Traversal Traversal(graph, Erdos);
+//   Traversal traversal(graph, Erdos);
 
-//   REQUIRE( *Traversal == Erdos );
+//   REQUIRE( *traversal == Erdos );
 // }
 
 // TEST_CASE("BFS operator++", "[weight=0][part=1][part=1b]") {
