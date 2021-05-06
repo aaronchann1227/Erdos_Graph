@@ -26,19 +26,6 @@ Graph makeGraph() {
 }
 
 //0. Test BFS
-
-// TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
-//   Graph graph=makeGraph();
-//   Vertex* Erdos = graph.getRoot();
-//   Traversal Traversal(graph, Erdos);
-
-//   bfs.add( Arthur Benjamin );
-//   bfs.add( Manjul Bhargava );
-//   bfs.add( Bruce Reznick );
-
-//   REQUIRE( *Traversal == Erdos );
-// } 
-
 // TEST_CASE("BFS maintains the correct point on top", "[weight=0][part=1][part=1b]") {
 //   Graph graph = makeGraph();
 //   Vertex* Erdos = graph.getRoot();
@@ -55,7 +42,6 @@ Graph makeGraph() {
 //   REQUIRE( *Traversal == Erdos );
 //   Traversal++;
 //   REQUIRE( *Traversal->getAuthor() == "ABBOTT, HARVEY LESLIE" );
-//   //REQUIRE( Traversal++ == "ACZEL, JANOS DEZSO" );
 // }
 
 // TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][part=1][part=1b]") {
