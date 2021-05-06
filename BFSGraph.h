@@ -12,12 +12,15 @@
 using namespace std;
 class BFS{
     public:
-        BFS(const Graph & input_graph, const Vertex* start);
-        void add(const Vertex & math_);
-        Vertex pop();
-        Vertex peek() const;
+        BFS(const Graph & input_graph, Vertex* start);
+        void add(Vertex* math_);
+        Vertex* pop();
+        Vertex* peek() const;
         bool empty() const;
         std::vector<int> myarr;
+        Graph& getG() {
+            return G;
+        }
 
     private:
         queue<Vertex*> q;

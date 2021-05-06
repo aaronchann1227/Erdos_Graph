@@ -12,10 +12,9 @@ using namespace std;
 /**
  * BFS Constructor that takes in a reference to a graph and a starting vertex pointer.
  */
-BFS::BFS(const Graph & input_graph, const Vertex* start) {  
+BFS::BFS(const Graph & input_graph, Vertex* start) : G(input_graph) {  
   Start=start;
   q.push(Start);
-  G=input_graph;
   myarr.resize(G.getSize());
   for (int i=0; i<myarr.size(); i++){
     myarr[i]=0;
@@ -25,7 +24,7 @@ BFS::BFS(const Graph & input_graph, const Vertex* start) {
 /**
  * Adds a vertex with the author's name to the traversal.
  */
-void BFS::add(const Vertex* & math_) {
+void BFS::add(Vertex* math_) {
   q.push(math_);
 }
 
@@ -33,7 +32,7 @@ void BFS::add(const Vertex* & math_) {
  * Removes and returns the current Vertex in the traversal.
  */
 Vertex* BFS::pop() {
-  Vertex v= q.front();
+  Vertex* v= q.front();
   q.pop();
   return v;
 }

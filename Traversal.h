@@ -8,10 +8,10 @@
 using namespace std;
 class Traversal{
     public:
-        Traversal(const Graph & input_graph, const Vertex* start);
+        Traversal(const Graph & input_graph, Vertex* start);
         void operator++();
         Vertex* operator*();
         bool T_done();
     private:
-        BFS BFS;
+        BFS bfs;
 };
