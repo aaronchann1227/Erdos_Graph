@@ -2,7 +2,7 @@
 EXENAME = Erdos
 
 # Object Types
-OBJS = Graph.o main.o
+OBJS = Traversal.o Graph.o main.o
 
 # Compilation Flags
 CXX = clang++
@@ -23,11 +23,19 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-Graph.o: main.cpp Graph.cpp
+Graph.o: main.cpp Graph.cpp Vertex.h Edge.h 
 	$(CXX) $(CXXFLAGS) main.cpp Graph.cpp
 
-test: output_msg catch/catchmain.cpp Tests/test.cpp Graph.cpp
-	$(LD) -g catch/catchmain.cpp Tests/test.cpp Graph.cpp $(LDFLAGS) -o test
+Traversal.o: BFSGraph.cpp Traversal.h
+	$(CXX) $(CXXFLAGS) BFSGraph.cpp -o Traversal.o
+
+#BFSGraph.o: BFSGraph.h
+
+test: output_msg test.o catch/catchmain.cpp Graph.o Traversal.o 
+	$(LD) -g catch/catchmain.cpp test.o Graph.o Traversal.o $(LDFLAGS) -o test
+
+test.o: Tests/test.cpp catch/catch.hpp Vertex.h Edge.h
+	$(CXX) $(CXXFLAGS) Tests/test.cpp
 
 clean:
 	-rm -f *.o $(EXENAME) test

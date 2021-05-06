@@ -3,10 +3,10 @@
 #include <iterator>
 #include "BFSGraph.h"
 #include <vector>
-#include "BFSGraph.cpp"
+//#include "BFSGraph.cpp"
 
 using namespace std;
-class Traversal{
+class Traversal {
     public:
         Traversal(const Graph & input_graph, Vertex* start);
         void operator++();

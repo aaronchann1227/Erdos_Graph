@@ -73,7 +73,7 @@ Graph makeGraph() {
 // }
 
 
-// 1. Check number of Edros’s neighbors == 512
+//1. Check number of Edros’s neighbors == 512
 TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
 
   Graph graph = makeGraph();
