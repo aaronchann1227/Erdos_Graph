@@ -79,17 +79,40 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
     }
 }
 
-// Graph::~Graph() {
-//     cout << "destructor called \n";
-//     for (unsigned j = 0; j < wholeEdges.size(); j++) {
-//         delete wholeEdges[j];
-//     }
+void Graph::_copy(Graph const & other) {
+    // Clear self
+    _delete();
 
-//     for (unsigned i = 0; i < vertices.size(); i++) {
-//         delete vertices[i];
-//     }
-// }
+    
+}
 
+void Graph::_delete() {
+    for (unsigned j = 0; j < wholeEdges.size(); j++) {
+        delete wholeEdges[j];
+    }
+
+    for (unsigned i = 0; i < vertices.size(); i++) {
+        delete vertices[i];
+    }
+}
+
+
+Graph::~Graph() {
+    _delete();
+}
+
+Graph::Graph(const Graph & other) {
+    _copy(other);
+}
+
+const Graph & Graph::operator=(Graph const & other) {
+    if (this != &other) {
+        _copy(other);
+    }
+    return *this;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 unsigned int Graph::getSize() {
     return vertices.size();
 }

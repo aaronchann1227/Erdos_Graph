@@ -15,18 +15,38 @@ class Graph {
         /**
         * Destructor for the Erdos Graph
         */ 
-        /*TODO*/
-        //~Graph();
-        
-        /**
-        * Abstract BFS traversal for the Erdos graph  
-        */ 
-        void ErdosBFS(Vertex* target) const;
+        ~Graph();
 
         /**
-        * find method that uses dijkstra's algorithm to find a path between two vertices
+        * copy constructor
         */
-        std::vector<Edge*> dijkstraFind(const Vertex v1, const Vertex v2) const;
+        Graph(const Graph & other);
+
+        /**
+        * = operator
+        */
+        const Graph & operator=(const Graph &other);
+
+        /**
+        * helper for copy constructor
+        */
+        void _copy(Graph const & other);
+       
+        /**
+        * helper for delete
+        */
+        void _delete() ;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+        // /**
+        // * Abstract BFS traversal for the Erdos graph  
+        // */ 
+        // void ErdosBFS(Vertex* target) const;
+
+        // /**
+        // * find method that uses dijkstra's algorithm to find a path between two vertices
+        // */
+        // std::vector<Edge*> dijkstraFind(const Vertex v1, const Vertex v2) const;
 
         /**
         * method that return the number of vertices of the graph.
@@ -73,4 +93,9 @@ class Graph {
         std::unordered_map< std::string, Vertex* > uniqueAuthors;
 
         std::unordered_map< std::string , unsigned int > authorToPaper;
+
+
+        std::vector< std::vector<std::string> > erdosVec_;
+
+        std::unordered_map<std::string , unsigned int> authorToPaper_;
 };
