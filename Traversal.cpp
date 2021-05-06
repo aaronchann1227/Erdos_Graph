@@ -15,9 +15,14 @@ Traversal::Traversal(Graph input_graph, Vertex* start) : bfs{BFS(input_graph, st
  */
 
 void Traversal::operator++(){
+    //cout<<"hi";
     Vertex* curr;
     curr=bfs.peek();
+    //cout<<curr->getAuthor();
+    //cout<<curr->getEdge();
     for (Edge* e : curr->getEdge()){
+        //cout<<e->vertex2<<endl;
+        //cout<<e->vertex1<<endl;
         if (e->vertex1==curr->getAuthor()){
             bfs.add(bfs.getG().getVertex(e->vertex2));
             //unsigned int ID = e->vertex2.getID();
@@ -35,6 +40,7 @@ void Traversal::operator++(){
     }
     if ((!bfs.empty())){
       bfs.myarr[curr->getID()]=1;
+      bfs.pop();
     }
 }
 
