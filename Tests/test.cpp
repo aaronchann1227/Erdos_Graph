@@ -79,7 +79,6 @@ TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   REQUIRE (512 == root->getEdge().size());
-
 }
 
 // 2. Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8

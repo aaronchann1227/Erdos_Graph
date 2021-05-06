@@ -51,13 +51,23 @@ class Graph {
         * return the Vertex given the name of the Mathematician.
         */ 
         Vertex* getVertex(std::string name);
+
+        /**
+        * return the Edge list of the Graph.
+        */ 
+        std::vector< Edge* > getWholeEdge();
+
+        /**
+        * return the all the Vertices of the Graph.
+        */ 
+        std::vector< Vertex* > getWholeVertex();
     
     private:
         Vertex* root;
 
         std::vector< Vertex* > vertices;
 
-        std::vector< Edge* > edges;
+        std::vector< Edge* > wholeEdges;
 
         std::unordered_map< std::string, Vertex* > uniqueAuthors;
 

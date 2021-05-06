@@ -1,13 +1,10 @@
 #include "Graph.h"
 #include <iostream>
 using namespace std;
-//unordered_map< Vertex, vector<Edge*> > vertexMap
-// vector<Edge*> edges;
-//
+
 Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
     this->authorToPaper = authorToPaper;
-    /////////////////Need to create vertex first
     string authorErdos = "Erdos";
     Vertex* setRoot = new Vertex(authorErdos);
     //root->setAuthor("Erdos");
@@ -18,7 +15,6 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
 
     //Traverses through the erdosVec the first time while initializing an
     //unordered map that is filled with all of the unique author names in erdosVec
-    //std::cout << " at line 16" << std::endl;
     unsigned int idCounter = 1;
     for (size_t i = 0; i < erdosVec.size(); i++) {
         for (size_t j = 0; j < erdosVec[i].size(); j++) {
@@ -62,6 +58,7 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
 
         //cout << "enter " << erdos1->getAuthor() << " line 59" << endl;
         Edge* erdosToErdos1 = new Edge("Erdos", erdos1->getAuthor(), weight);
+        wholeEdges.push_back(erdosToErdos1);
         //Edge erdosToErdos1("Erdos", erdos1->getAuthor(), weight);
         
         //adding edge for Erdos and Erdos1
@@ -74,6 +71,7 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
             //An edge will always have the following format:
             // Edge (name of whoever is closer to Erdos, name of second person, weight)
             Edge* edge = new Edge(erdos1->getAuthor(), erdos2->getAuthor(), 1.0);
+            wholeEdges.push_back(edge);
             //Edge edge(erdos1->getAuthor(), erdos2->getAuthor(), 1.0);
             erdos1->addEdge(edge);
             erdos2->addEdge(edge);
@@ -82,8 +80,8 @@ Graph::Graph(std::vector< std::vector<std::string> > erdosVec, std::unordered_ma
 }
 
 Graph::~Graph() {
-    for (unsigned j = 0; j < edges.size(); j++) {
-        delete edges[j];
+    for (unsigned j = 0; j < wholeEdges.size(); j++) {
+        delete wholeEdges[j];
     }
 
     for (unsigned i = 0; i < vertices.size(); i++) {
@@ -110,4 +108,12 @@ Vertex* Graph::getRoot() {
 
 Vertex* Graph::getVertex(std::string name) {
     return uniqueAuthors[name];
+}
+
+std::vector< Edge* > Graph::getWholeEdge() {
+    return wholeEdges;
+}
+
+std::vector< Vertex* > Graph::getWholeVertex() {
+    return vertices;
 }
