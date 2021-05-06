@@ -21,7 +21,7 @@ Traversal::operator++(){
     Vertex* curr;
     curr=BFS.peek();
     //Pseudocode Starts
-    for Edge* e :curr.getAdjacent()){
+    for Edge* e :curr.getEdge()){
         if (e->vertex1==curr){
             BFS.add(&e->vertex2);
             //unsigned int ID = e->vertex2.getID();
