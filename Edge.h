@@ -17,6 +17,7 @@ class Edge {
         // the two ends of the Edge
         std::string vertex1, vertex2;
 
+        
         // the weight of the Edge
         double weight;
 };

@@ -29,8 +29,6 @@ Graph.o: main.cpp Graph.cpp Vertex.h Edge.h
 Traversal.o: BFSGraph.cpp Traversal.h
 	$(CXX) $(CXXFLAGS) BFSGraph.cpp -o Traversal.o
 
-#BFSGraph.o: BFSGraph.h
-
 test: output_msg test.o catch/catchmain.cpp Graph.o Traversal.o 
 	$(LD) -g catch/catchmain.cpp test.o Graph.o Traversal.o $(LDFLAGS) -o test
 

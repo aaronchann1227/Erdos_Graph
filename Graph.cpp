@@ -1,5 +1,7 @@
 #include "Graph.h"
 #include <iostream>
+#include "DisjointSet.h"
+#include <algorithm>
 using namespace std;
 void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
@@ -142,5 +144,31 @@ std::vector< Vertex* > Graph::getWholeVertex() {
 
 ////////////////////////////////////////////////
 std::vector<Edge*> Graph::KruskalMST() {
+    DisjointSets forest;
+    for (Vertex* v: vertices) {
+        forest.addelements(v->getID());
+    }
+
+    std::vector<Edge*> priorityQueue;
+    for (Edge* edge: wholeEdges) {
+        priorityQueue.push_back(edge);
+    }
+    std::sort(priorityQueue.begin(), priorityQueue.end(), compareEdges);
+
+    std::vector<Edge*> spanningTree;
+
+    while (spanningTree.size() < wholeEdges.size() - 1) {
+        Edge* edge = priorityQueue.front();
+        priorityQueue.erase(priorityQueue.begin());
+        Vertex* v1 = getVertex(edge->vertex1); 
+        Vertex* v2 = getVertex(edge->vertex2); 
+        
+        if (forest.find(v1->getID()) != forest.find(v2->getID())) {
+            spanningTree.push_back(edge);
+            forest.setunion(forest.find(v1->getID()), forest.find(v2->getID()));
+        }
+    }
+
+    return spanningTree;
 
 }

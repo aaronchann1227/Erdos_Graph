@@ -78,6 +78,8 @@ class Graph {
         * find method that uses Kruskal's algorithm to find a list of Edges that connects a minimum spanning tree.
         */
         std::vector<Edge*> KruskalMST();
+
+        bool compareEdges(Edge* edge1, Edge* edge2) {return edge1->weight < edge2->weight;}
     
     private:
         Vertex* root;
