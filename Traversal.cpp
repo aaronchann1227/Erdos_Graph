@@ -18,7 +18,7 @@ void Traversal::operator++(){
     //cout<<"hi";
     Vertex* curr;
     curr=bfs.peek();
-    //cout<<curr->getAuthor();
+    cout<<curr->getAuthor();
     //cout<<curr->getEdge();
     for (Edge* e : curr->getEdge()){
         //cout<<e->vertex2<<endl;

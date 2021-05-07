@@ -45,7 +45,7 @@ TEST_CASE("BFS operator++", "[weight=0][part=1]") {
 
   REQUIRE( *Traversal == Erdos );
   ++Traversal;
-  //cout<<"line 48";
+  cout<<"line 48";
   REQUIRE( (*Traversal)->getAuthor() == "ABBOTT, HARVEY LESLIE" );
 }
 
@@ -58,8 +58,9 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][par
   REQUIRE( (*Traversal) == Erdos );
   int count=0;
   //while (!Traversal.T_done()){
-  while (count<510){
+  while (count<519){
     ++Traversal;
+    //cout<<(*Traversal)->getAuthor()<<endl;
     if ((*Traversal)==Erdos){
       check=true;
     }

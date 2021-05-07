@@ -7,6 +7,7 @@
 //#include "Graph.cpp"
 #include "Graph.h"
 #include "BFSGraph.h"
+#include <iostream>
 using namespace std;
 
 /**
@@ -16,6 +17,7 @@ BFS::BFS(Graph input_graph, Vertex* start) : G(input_graph) {
   Start=start;
   q.push(Start);
   myarr.resize(G.getSize());
+  cout<<myarr.size()<<endl;
   for (int i=0; i<myarr.size(); i++){
     myarr[i]=0;
   }
