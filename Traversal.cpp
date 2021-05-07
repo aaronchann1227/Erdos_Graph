@@ -15,32 +15,24 @@ Traversal::Traversal(Graph input_graph, Vertex* start) : bfs{BFS(input_graph, st
  */
 
 void Traversal::operator++(){
-    //cout<<"hi";
     Vertex* curr;
     curr=bfs.peek();
-    cout<<curr->getAuthor();
-    //cout<<curr->getEdge();
-    for (Edge* e : curr->getEdge()){
-        //cout<<e->vertex2<<endl;
-        //cout<<e->vertex1<<endl;
-        if (e->vertex1==curr->getAuthor()){
-            bfs.add(bfs.getG().getVertex(e->vertex2));
-            //unsigned int ID = e->vertex2.getID();
-            //myarr[ID]=1;
-        }
-        else{
-            bfs.add(bfs.getG().getVertex(e->vertex1));
-            //unsigned int ID = e->vertex1.getID();
-            //myarr[ID]=1;
-        }
-    }
+    bfs.myarr[0] = 1;
     while ((!bfs.empty()) && (bfs.myarr[curr->getID()])) {
       Vertex* vertex=bfs.pop();
       curr=vertex;
     }
+    for (Edge* e : curr->getEdge()){
+        if (e->vertex1==curr->getAuthor() && !bfs.myarr[bfs.getG().getVertex(e->vertex2)->getID()]){
+            bfs.add(bfs.getG().getVertex(e->vertex2));
+        }
+        else if (!bfs.myarr[bfs.getG().getVertex(e->vertex1)->getID()]){
+            bfs.add(bfs.getG().getVertex(e->vertex1));
+        }
+    }
     if ((!bfs.empty())){
       bfs.myarr[curr->getID()]=1;
-      bfs.pop();
+      //bfs.pop();
     }
 }
 

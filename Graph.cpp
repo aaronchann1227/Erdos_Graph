@@ -12,10 +12,12 @@ void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVe
     //cout << "enter constructor12";
     root->setID(0);
     vertices.push_back(root);
+    uniqueAuthors["Erdos"] = root;
 
     //Traverses through the erdosVec the first time while initializing an
     //unordered map that is filled with all of the unique author names in erdosVec
     unsigned int idCounter = 1;
+
     for (size_t i = 0; i < erdosVec.size(); i++) {
         for (size_t j = 0; j < erdosVec[i].size(); j++) {
 

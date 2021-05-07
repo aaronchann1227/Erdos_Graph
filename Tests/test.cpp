@@ -34,8 +34,6 @@ TEST_CASE("BFS maintains the correct point on top", "[weight=1][part=1]") {
   Traversal traversal(graph, erdos);
 
   REQUIRE( erdos->getAuthor() == (*traversal)->getAuthor());
-  REQUIRE (1 == 1);
-  cout << "print line 38";
 }
 
 TEST_CASE("BFS operator++", "[weight=0][part=1]") {
@@ -45,7 +43,6 @@ TEST_CASE("BFS operator++", "[weight=0][part=1]") {
 
   REQUIRE( *Traversal == Erdos );
   ++Traversal;
-  cout<<"line 48";
   REQUIRE( (*Traversal)->getAuthor() == "ABBOTT, HARVEY LESLIE" );
 }
 
@@ -55,10 +52,13 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][par
   Traversal Traversal(graph, Erdos);
   bool check=false;
 
+  // for (Vertex* a : graph.getWholeVertex()) {
+  //   std::cout << a -> getAuthor() << std::endl;
+  // }
+
   REQUIRE( (*Traversal) == Erdos );
   int count=0;
-  //while (!Traversal.T_done()){
-  while (count<519){
+  while (!Traversal.T_done()){
     ++Traversal;
     //cout<<(*Traversal)->getAuthor()<<endl;
     if ((*Traversal)==Erdos){
@@ -69,17 +69,17 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][par
   REQUIRE( check == false );
 }
 
-// TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=0][part=1][part=1b]") {
-//   Graph graph=makeGraph();
-//   Vertex* Erdos = graph.getRoot();
-//   Traversal Traversal(graph, Erdos);
-//   int count=0;
-//   while (!Traversal.T_done()){
-//     Traversal++;
-//     count+=1;
-//   }
-//   REQUIRE( count + 1 == graph.getSize() );
-// }
+TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=0][part=1]") {
+  Graph graph=makeGraph();
+  Vertex* Erdos = graph.getRoot();
+  Traversal Traversal(graph, Erdos);
+  int count=0;
+  while (!Traversal.T_done()){
+    ++Traversal;
+    count+=1;
+  }
+  REQUIRE( count == graph.getSize() );
+}
 
 
 //1. Check number of Edros’s neighbors == 512

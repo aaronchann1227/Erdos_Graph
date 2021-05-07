@@ -25,7 +25,7 @@ class BFS{
     private:
         queue<Vertex*> q;
         Vertex* Start;
-        Vertex* Current;
+        //Vertex* Current;
         Graph G;
         //std::vector<vector<int> > myarr;
 };
