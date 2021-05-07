@@ -157,7 +157,7 @@ std::vector<Edge*> Graph::KruskalMST() {
 
     std::vector<Edge*> spanningTree;
 
-    while (spanningTree.size() < wholeEdges.size() - 1) {
+    while (spanningTree.size() < vertices.size() - 1) {
         Edge* edge = priorityQueue.front();
         priorityQueue.erase(priorityQueue.begin());
         Vertex* v1 = getVertex(edge->vertex1); 
