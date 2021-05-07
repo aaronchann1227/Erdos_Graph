@@ -39,16 +39,6 @@ class Graph {
         */
         void _delete() ;
 
-        // /**
-        // * Abstract BFS traversal for the Erdos graph  
-        // */ 
-        // void ErdosBFS(Vertex* target) const;
-
-        // /**
-        // * find method that uses dijkstra's algorithm to find a path between two vertices
-        // */
-        // std::vector<Edge*> dijkstraFind(const Vertex v1, const Vertex v2) const;
-
         /**
         * method that return the number of vertices of the graph.
         */ 
@@ -83,6 +73,11 @@ class Graph {
         * return the all the Vertices of the Graph.
         */ 
         std::vector< Vertex* > getWholeVertex();
+
+        /**
+        * find method that uses Kruskal's algorithm to find a list of Edges that connects a minimum spanning tree.
+        */
+        std::vector<Edge*> KruskalMST();
     
     private:
         Vertex* root;
@@ -95,6 +90,7 @@ class Graph {
 
         std::unordered_map< std::string , unsigned int > authorToPaper_;
 
+        std::unordered_map< unsigned int, Vertex* > idToVertex;
 
         std::vector< std::vector<std::string> > erdosVec_;
 

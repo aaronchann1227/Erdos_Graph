@@ -20,3 +20,11 @@ class Edge {
         // the weight of the Edge
         double weight;
 };
+
+class EdgeCompare {
+    public:
+        // comparator function
+        bool operator()(const Edge& a, const Edge& b) {
+            return a.weight > b.weight; // compare based on age
+    }
+};

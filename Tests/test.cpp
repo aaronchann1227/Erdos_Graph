@@ -25,6 +25,7 @@ Graph makeGraph() {
   Graph graph(readErdos(), createAuthorToPaper());
   return graph;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 //TESTS for Graph Structure
@@ -33,7 +34,7 @@ TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
 
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
-  REQUIRE (512 == root->getEdge().size());
+  REQUIRE (513 == root->getEdge().size());
 }
 
 // 2. Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8
@@ -199,7 +200,6 @@ TEST_CASE("Check weight 2", "[weight=1][part=1]") {
   REQUIRE (endreEdge->weight == 1 / (2 * 29));
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //TEST for BFS
@@ -249,10 +249,29 @@ TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[w
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
-  int count=0;
+  //
+  int count = -1;
   while (!Traversal.T_done()){
+    count += 1;
     ++Traversal;
-    count+=1;
   }
   REQUIRE( count == graph.getSize() );
+}
+
+
+TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
+  Graph graph=makeGraph();
+  Vertex* Erdos = graph.getRoot();
+  Traversal Traversal(graph, Erdos);
+  //
+  int count = -1;
+  while (!Traversal.T_done()){
+    count += 1;
+    ++Traversal;
+  }
+  vector<string> BFSvisited = Traversal.getBFSvisited();
+
+  for (size_t i = 0; i < 10; i++) {
+    cout << BFSvisited[i] << endl;
+  }
 }

@@ -13,6 +13,8 @@
 #include <iomanip>
 #include <unordered_map>
 
+using namespace std;
+
 std::vector<std::vector<std::string>> readErdos() {
   std::ifstream text("Erdos.csv");
 	
@@ -39,7 +41,7 @@ std::vector<std::vector<std::string>> readErdos() {
   out.push_back("end123");
 
   std::vector< std::vector<std::string> > erdosVec;
-  erdosVec.resize(512, std::vector<std::string> (0));
+  erdosVec.resize(513, std::vector<std::string> (0));
 
   unsigned count = 0;
   for (std::vector<std::string>::const_iterator i = out.begin(); i != out.end(); ++i) {
@@ -57,7 +59,9 @@ std::vector<std::vector<std::string>> readErdos() {
         }
         //std::cout << "line 60" << "\n";
   }
-  
+  //getting a bug that the last line of file is not being parsed -- manual insert
+  erdosVec[512] = vector<string> {"ZIV, ABRAHAM", "Aharoni, Merav", "Amdursky, Vardy", "Asaf, Sigal", "Fournier, Laurent", "Gal, Shmuel", "GINZBURG, ABRAHAM", "Maharik, Ron", "Nehama, Ilan", "Nikulshin, Ilya", "Rubinstein, Reuven Y."};
+
   return erdosVec;
 }
 

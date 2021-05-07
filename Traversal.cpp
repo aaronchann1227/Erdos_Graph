@@ -32,6 +32,7 @@ void Traversal::operator++(){
     }
     if ((!bfs.empty())){
       bfs.myarr[curr->getID()]=1;
+      BFSvisited.push_back(curr->getAuthor());
       //bfs.pop();
     }
 }

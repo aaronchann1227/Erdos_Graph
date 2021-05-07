@@ -7,9 +7,7 @@ void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVe
     this->erdosVec_ = erdosVec;
     string authorErdos = "Erdos";
     Vertex* setRoot = new Vertex(authorErdos);
-    //root->setAuthor("Erdos");
     root = setRoot;
-    //cout << "enter constructor12";
     root->setID(0);
     vertices.push_back(root);
     uniqueAuthors["Erdos"] = root;
@@ -22,10 +20,15 @@ void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVe
         for (size_t j = 0; j < erdosVec[i].size(); j++) {
 
             if ( uniqueAuthors.find(erdosVec[i][j]) == uniqueAuthors.end() ) {
-                //Vertex author(erdosVec[i][j]);
                 Vertex* author = new Vertex(erdosVec[i][j]);
                 author->setID(idCounter);
+
+                // populating uniqueAuthors
                 uniqueAuthors[erdosVec[i][j]] = author;
+                
+                // populating idToVertex
+                idToVertex[idCounter] = author;
+
                 //Initializes a vector of Vertex pointers to each unique author
                 vertices.push_back(author);
                 
@@ -135,4 +138,9 @@ std::vector< Edge* > Graph::getWholeEdge() {
 
 std::vector< Vertex* > Graph::getWholeVertex() {
     return vertices;
+}
+
+////////////////////////////////////////////////
+std::vector<Edge*> Graph::KruskalMST() {
+
 }
