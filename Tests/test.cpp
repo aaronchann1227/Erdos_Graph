@@ -22,6 +22,11 @@ using namespace std;
 
 Graph makeGraph() {
   //std::cout << " enter makeGraph()" << std::endl;
+  // std::vector< std::vector<std::string> > testErdosVec = readErdos();
+
+  // for (size_t i = 0; i < testErdosVec.size(); i++ ) {
+  //   cout << i << ": " << testErdosVec[i][0] << endl;
+  // }
   Graph graph(readErdos(), createAuthorToPaper());
   return graph;
 }
@@ -34,7 +39,7 @@ TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
 
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
-  REQUIRE (513 == root->getEdge().size());
+  REQUIRE (512 == root->getEdge().size());
 }
 
 // 2. Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8
@@ -258,7 +263,6 @@ TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[w
   REQUIRE( count == graph.getSize() );
 }
 
-
 TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
@@ -275,3 +279,5 @@ TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
     cout << BFSvisited[i] << endl;
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////////
