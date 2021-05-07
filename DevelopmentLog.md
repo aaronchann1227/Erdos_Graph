@@ -9,4 +9,4 @@
 
 - This week (week 3), we focussed mostly on compiling our code and writing out a few test cases. We have some model test cases for the constructor and are also working on test cases to check BFS. The main goal for the next couple of days is to write the make file and get our code to compile.
 
-- In week 4, a destructor was added and finished debugging the Graph constrctor. All test case were passed for the Graph construction.
+- In week 4, a destructor was added and finished debugging the Graph constrctor. All test case were passed for the Graph construction and BFS. 
