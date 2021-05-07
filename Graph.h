@@ -79,7 +79,7 @@ class Graph {
         */
         std::vector<Edge*> KruskalMST();
 
-        bool compareEdges(Edge* edge1, Edge* edge2) {return edge1->weight < edge2->weight;}
+        
     
     private:
         Vertex* root;
@@ -97,3 +97,5 @@ class Graph {
         std::vector< std::vector<std::string> > erdosVec_;
 
 };
+
+bool compareEdges(Edge* edge1, Edge* edge2);

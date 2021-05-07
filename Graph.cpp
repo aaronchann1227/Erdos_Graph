@@ -141,7 +141,7 @@ std::vector< Edge* > Graph::getWholeEdge() {
 std::vector< Vertex* > Graph::getWholeVertex() {
     return vertices;
 }
-
+bool compareEdges(Edge* edge1, Edge* edge2) {return edge1->weight < edge2->weight;}
 ////////////////////////////////////////////////
 std::vector<Edge*> Graph::KruskalMST() {
     DisjointSets forest;
@@ -162,7 +162,7 @@ std::vector<Edge*> Graph::KruskalMST() {
         priorityQueue.erase(priorityQueue.begin());
         Vertex* v1 = getVertex(edge->vertex1); 
         Vertex* v2 = getVertex(edge->vertex2); 
-        
+
         if (forest.find(v1->getID()) != forest.find(v2->getID())) {
             spanningTree.push_back(edge);
             forest.setunion(forest.find(v1->getID()), forest.find(v2->getID()));
