@@ -307,3 +307,27 @@ TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
   REQUIRE( testGraph.getSize() - 1 == KruskalEdgeVec.size() );
   REQUIRE( (abs(sum1-expected_weight)) <= 0.001);
 }
+
+TEST_CASE("Test Kruskal on small Erdos graph (2)", "[weight=0]") {
+  std::vector< std::vector<std::string> > testErdosVec2;
+
+  testErdosVec2.push_back(vector<string> {"ABBOTT, HARVEY LESLIE","Charles Edward", "HANSON, DENIS"});
+  testErdosVec2.push_back(vector<string> {"CHUNG, KAI-LAI","Balkema, August"});
+  testErdosVec2.push_back(vector<string> {"HANSON, DENIS","Alspach, Brian Roger&Ao, Suqin","ABBOTT, HARVEY LESLIE"});
+
+  Graph testGraph2(testErdosVec2, createAuthorToPaper());
+  float expected_weight2= (1.0/2.0)*(1.0 + 1.0 + 1.0/4.0) + 3.0;
+  // caluclated sum manually
+  //cout << testGraph.getSize() << endl;
+
+  std::vector<Edge*> KruskalEdgeVec2 = testGraph2.KruskalMST();
+  float sum2=0.0000;
+  for (Edge* edge : KruskalEdgeVec2){
+    //cout<<edge->weight<<endl;
+    sum2+=edge->weight;
+  }
+  //cout<<sum1<<endl;
+
+  REQUIRE( testGraph2.getSize() - 1 == KruskalEdgeVec2.size() );
+  REQUIRE( (abs(sum2-expected_weight2)) <= 0.001);
+}
