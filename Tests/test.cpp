@@ -227,9 +227,6 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][par
   Traversal Traversal(graph, Erdos);
   bool check=false;
 
-  // for (Vertex* a : graph.getWholeVertex()) {
-  //   std::cout << a -> getAuthor() << std::endl;
-  // }
 
   REQUIRE( (*Traversal) == Erdos );
   int count=0;
@@ -293,16 +290,12 @@ TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
 
   Graph testGraph(testErdosVec, createAuthorToPaper());
   float expected_weight= (1.0/2.0)*(1.0/35.0 + 1.0/3.0 + 1.0) + 6.0;
-  // caluclated sum manually
-  //cout << testGraph.getSize() << endl;
 
   std::vector<Edge*> KruskalEdgeVec = testGraph.KruskalMST();
   float sum1=0.0000;
   for (Edge* edge : KruskalEdgeVec){
-    //cout<<edge->weight<<endl;
     sum1+=edge->weight;
   }
-  //cout<<sum1<<endl;
 
   REQUIRE( testGraph.getSize() - 1 == KruskalEdgeVec.size() );
   REQUIRE( (abs(sum1-expected_weight)) <= 0.001);
