@@ -48,8 +48,8 @@ void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVe
         //
         //  An edge will always have the following format:
         //  Edge (name of whoever is closer to Erdos, name of second person, weight)
-        double weight = 1;
-        unsigned int publications = 1;
+        double weight = 0.5;
+        double publications = 1.0;
         if (authorToPaper.find(erdosVec[i][0]) != authorToPaper.end() ) {
             publications = authorToPaper[erdosVec[i][0]];
             weight = 1 / (2 * publications);

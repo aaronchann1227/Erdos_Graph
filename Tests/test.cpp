@@ -188,7 +188,7 @@ TEST_CASE("Check weight 1", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Edge* roxbyEdge = root->getEdge("HALL, RICHARD ROXBY");
-  REQUIRE (roxbyEdge->weight == 1 / (2 * 14));
+  REQUIRE (roxbyEdge->weight == 1.0 / (2.0 * 14.0));
 }
 
 // 13. Check weight of SZEMEREDI, ENDRE == formula(29)
@@ -196,7 +196,7 @@ TEST_CASE("Check weight 2", "[weight=1][part=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Edge* endreEdge = root->getEdge("SZEMEREDI, ENDRE");
-  REQUIRE (endreEdge->weight == 1 / (2 * 29));
+  REQUIRE (endreEdge->weight == 1.0 / (2.0  * 29.0 ));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,10 +292,18 @@ TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
   testErdosVec.push_back(vector<string> {"BABAI, LASZLO","Abert, Miklos","Adams, Michael E.","AJTAI, MIKLOS"});
 
   Graph testGraph(testErdosVec, createAuthorToPaper());
-  cout << testGraph.getSize() << endl;
+  float expected_weight= (1.0/2.0)*(1.0/35.0 + 1.0/3.0 + 1.0) + 6.0;
+  // caluclated sum manually
+  //cout << testGraph.getSize() << endl;
 
   std::vector<Edge*> KruskalEdgeVec = testGraph.KruskalMST();
+  float sum1=0.0000;
+  for (Edge* edge : KruskalEdgeVec){
+    //cout<<edge->weight<<endl;
+    sum1+=edge->weight;
+  }
+  //cout<<sum1<<endl;
 
   REQUIRE( testGraph.getSize() - 1 == KruskalEdgeVec.size() );
-  // manually verify???
+  REQUIRE( (abs(sum1-expected_weight)) <= 0.001);
 }
