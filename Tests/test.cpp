@@ -229,10 +229,10 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][par
 
 
   REQUIRE( (*Traversal) == Erdos );
+  //BFS traversal on the whole graph (over 13000 vertices)
   int count=0;
   while (!Traversal.T_done()){
     ++Traversal;
-    //cout<<(*Traversal)->getAuthor()<<endl;
     if ((*Traversal)==Erdos){
       check=true;
     }
@@ -258,7 +258,6 @@ TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
-  //
   int count = -1;
   while (!Traversal.T_done()){
     count += 1;
@@ -266,6 +265,7 @@ TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
   }
   vector<string> BFSvisited = Traversal.getBFSvisited();
 
+  // print out the first ten visited vertex of BFS. Manually verified. 
   for (size_t i = 0; i < 10; i++) {
     cout << BFSvisited[i] << endl;
   }
