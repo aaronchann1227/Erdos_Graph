@@ -221,7 +221,7 @@ TEST_CASE("BFS operator++", "[weight=0][part=1]") {
   REQUIRE( (*Traversal)->getAuthor() == "ABBOTT, HARVEY LESLIE" );
 }
 
-TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][part=1][part=1b]") {
+TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=1][part=1][part=1b]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
@@ -241,7 +241,7 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=0][par
   REQUIRE( check == false );
 }
 
-TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=0][part=1]") {
+TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=1][part=1]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
@@ -274,7 +274,7 @@ TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////TESTS for Kruskal
 
-TEST_CASE("Check num of Edges Kruskal return", "[weight=0]") {
+TEST_CASE("Check num of Edges Kruskal return", "[weight=1]") {
   Graph graph = makeGraph();
   std::vector<Edge*> KruskalEdgeVec = graph.KruskalMST();
 
@@ -300,10 +300,10 @@ TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
   }
 
   REQUIRE( testGraph.getSize() - 1 == KruskalEdgeVec.size() );
-  REQUIRE( (abs(sum1-expected_weight)) <= 0.001);
+  REQUIRE( (abs(sum1-expected_weight)) < 0.001);
 }
 
-TEST_CASE("Test Kruskal on small Erdos graph (2)", "[weight=0]") {
+TEST_CASE("Test Kruskal on small Erdos graph (2)", "[weight = 1]") {
   std::vector< std::vector<std::string> > testErdosVec2;
 
   testErdosVec2.push_back(vector<string> {"ABBOTT, HARVEY LESLIE","Charles Edward", "HANSON, DENIS"});
@@ -324,10 +324,10 @@ TEST_CASE("Test Kruskal on small Erdos graph (2)", "[weight=0]") {
   }
 
   REQUIRE( testGraph2.getSize() - 1 == KruskalEdgeVec2.size() );
-  REQUIRE( (abs(sum2-expected_weight2)) <= 0.001);
+  REQUIRE( (abs(sum2-expected_weight2)) < 0.001);
 }
 
-TEST_CASE("Test Kruskal on small Erdos graph (3)", "[weight=0]") {
+TEST_CASE("Test Kruskal on small Erdos graph (3)", "[weight=1]") {
   std::vector< std::vector<std::string> > testErdosVec3;
 
   testErdosVec3.push_back(vector<string> {"ABBOTT, HARVEY LESLIE","MOON, JOHN WESLEY", "SAUER, NORBERT W."});
@@ -344,5 +344,25 @@ TEST_CASE("Test Kruskal on small Erdos graph (3)", "[weight=0]") {
   }
 
   REQUIRE( testGraph3.getSize() - 1 == KruskalEdgeVec3.size() );
-  REQUIRE( (abs(sum3-expected_weight3)) <= 0.001);
+  REQUIRE( (abs(sum3-expected_weight3)) < 0.001);
 }
+
+TEST_CASE("Testing Kruskal on the entire Graph", "[weight=1]") {
+  Graph graph = makeGraph();
+  float expectedTotalWeight = 0.0;
+  unsigned int numOfErdos1 = 0;
+  for (Edge* edge: graph.getRoot()->getEdge()) {
+    expectedTotalWeight += edge->weight;
+    numOfErdos1++;
+  }
+  float totalWeightErdos2 = (float) graph.getSize() - numOfErdos1 - 1;
+  expectedTotalWeight += totalWeightErdos2;
+
+  std::vector<Edge*> minimalSpanningTree = graph.KruskalMST();
+  float resultEdgeWeight = 0.0;
+  for (Edge* edge: minimalSpanningTree) {
+    resultEdgeWeight += edge->weight;
+  }
+  REQUIRE (abs(expectedTotalWeight - resultEdgeWeight) < 0.0001 );
+}
+
