@@ -78,6 +78,7 @@ class Graph {
         * find method that uses Kruskal's algorithm to find a list of Edges that connects a minimum spanning tree.
         */
         std::vector<Edge*> KruskalMST();
+        std::vector<std::pair<unsigned int, unsigned int>> BCVisualize();
 
         
     
@@ -95,7 +96,13 @@ class Graph {
         std::unordered_map< unsigned int, Vertex* > idToVertex;
 
         std::vector< std::vector<std::string> > erdosVec_;
+        unsigned int length = 1000;
+        unsigned int width = 1000;
+        unsigned int Area = length*width;
 
 };
 
 bool compareEdges(Edge* edge1, Edge* edge2);
+float fa(unsigned x, unsigned k);
+float fr(unsigned x, unsigned k);
+float magnitude(std::pair<unsigned int, unsigned int> delta);

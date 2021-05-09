@@ -172,3 +172,68 @@ std::vector<Edge*> Graph::KruskalMST() {
     return spanningTree;
 
 }
+
+float fa(unsigned x, unsigned k){
+    return x*x/k;
+}
+
+float fr(unsigned x, unsigned k){
+    return k*k/x;
+}
+
+float magnitude(std::pair<unsigned int, unsigned int> delta){
+    return std::pow((delta.first*delta.first)+(delta.second*delta.second),0.5);
+}
+
+std::vector<std::pair<unsigned int, unsigned int>> Graph::BCVisualize(){
+    unsigned k = std::pow(Area/vertices.size(), 0.5);
+    float t=10;
+    unsigned int c=0;
+    std::vector<std::pair<unsigned int, unsigned int>> coordinates;
+    std::vector<std::pair<unsigned int, unsigned int>> displacement;
+    /* std::vector<int> numbers;
+
+    for(int i=0; i<vertices.size(); i++)       // add 0-99 to the vector
+        numbers.push_back(i);
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(seed)); */
+
+    for (Vertex* v : vertices){
+            coordinates.push_back(std::pair<unsigned int, unsigned int>((v->getID()%width), (v->getID()/width)));
+    }
+    displacement.resize(coordinates.size());
+    for (int i = 0; i<10; i++){
+        for (Vertex* v : vertices){
+            std::pair<unsigned int, unsigned int> vdisp(0,0);
+            for (Vertex* u : vertices){
+                unsigned int cord1=coordinates[v->getID()].first-coordinates[u->getID()].first;
+                unsigned int cord2=coordinates[v->getID()].second-coordinates[u->getID()].second;
+                std::pair<unsigned int, unsigned int> delta(cord1, cord2);
+                vdisp.first+=(delta.first/magnitude(delta)) * fr(magnitude(delta), k);
+                vdisp.second+=(delta.second/magnitude(delta)) * fr(magnitude(delta), k);
+                displacement[v->getID()]=(vdisp);
+            }
+        }
+        for (Edge* e : wholeEdges){
+            int v1id=getVertex(e->vertex1)->getID();
+            int v2id=getVertex(e->vertex2)->getID();
+            unsigned int cord3=coordinates[getVertex(e->vertex1)->getID()].first-coordinates[getVertex(e->vertex2)->getID()].first;
+            unsigned int cord4=coordinates[getVertex(e->vertex1)->getID()].second-coordinates[getVertex(e->vertex2)->getID()].second;
+            std::pair<unsigned int, unsigned int> delta(cord3, cord4);
+            displacement[v1id].first-=(delta.first/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v1id].second-=(delta.second/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v2id].first+=(delta.first/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v2id].second+=(delta.second/magnitude(delta)) * fa(magnitude(delta), k);
+        }
+        for (Vertex* v : vertices){
+            int ID = v->getID();
+            coordinates[ID].first+=(displacement[ID].first/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
+            coordinates[ID].second+=(displacement[ID].second/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
+            coordinates[ID].first = min(width, std::max(c, coordinates[ID].first)); 
+            coordinates[ID].second = min(length, std::max(c, coordinates[ID].second));
+        }
+    t*=0.9;
+    }
+    return coordinates;
+}
