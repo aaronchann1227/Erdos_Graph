@@ -263,12 +263,11 @@ TEST_CASE("print 10 BFSvisited", "[weight=1]") {
     count += 1;
     ++Traversal;
   }
+  // A vector of names that BFS traversed.
   vector<string> BFSvisited = Traversal.getBFSvisited();
 
-  // print out the first ten visited vertex of BFS. Manually verified. 
-  for (size_t i = 0; i < 10; i++) {
-    cout << BFSvisited[i] << endl;
-  }
+  // print out the first 10 names that BFS traversed.
+  Traversal.printBFSvisited(10);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

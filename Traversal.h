@@ -12,6 +12,7 @@ class Traversal {
         Vertex* operator*();
         bool T_done();
         vector<string> getBFSvisited() { return BFSvisited; }
+        void printBFSvisited(unsigned itr);
 
     private:
         BFS bfs;
