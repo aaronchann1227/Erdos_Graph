@@ -7,8 +7,11 @@
 
 class Graph {
     public:
-
+        /**
+        * Helper function for the Constructor
+        */ 
         void constructGraphHelper(std::vector<std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper);
+
         /**
         * Constructor for the Erdos Graph
         */ 
@@ -78,31 +81,63 @@ class Graph {
         * find method that uses Kruskal's algorithm to find a list of Edges that connects a minimum spanning tree.
         */
         std::vector<Edge*> KruskalMST();
+
+        /**
+        * THE BARYCENTRIC METHOD to visualize the Graph
+        */
         std::vector<std::pair<unsigned int, unsigned int>> BCVisualize();
 
         
     
     private:
+        // root is always Erdos
         Vertex* root;
 
+        // the vector to store all the vertices
         std::vector< Vertex* > vertices;
 
+        // the vector to store all the edges
         std::vector< Edge* > wholeEdges;
 
+        // a map from name of the Mathematician to the corresponding vertex
         std::unordered_map< std::string, Vertex* > uniqueAuthors;
 
+        // a map from name of the Mathematician to number of publications
         std::unordered_map< std::string , unsigned int > authorToPaper_;
 
+        // a map from vertex ID to the vertex
         std::unordered_map< unsigned int, Vertex* > idToVertex;
 
+        // a vector that contains all Mathematicians
         std::vector< std::vector<std::string> > erdosVec_;
+
+        // length of the visualization figure (constant)
         unsigned int length = 1000;
+
+        // width of the visualization figure (constant)
         unsigned int width = 1000;
+
+        // area of the visualization figure (constant)
         unsigned int Area = length*width;
 
 };
 
+/**
+* The method to compare two edges
+*/
 bool compareEdges(Edge* edge1, Edge* edge2);
+
+/**
+* helper function of BCVisualize()
+*/
 float fa(unsigned x, unsigned k);
+
+/**
+* helper function of BCVisualize()
+*/
 float fr(unsigned x, unsigned k);
+
+/**
+* helper function of BCVisualize() to calculate the magnitude
+*/
 float magnitude(std::pair<unsigned int, unsigned int> delta);

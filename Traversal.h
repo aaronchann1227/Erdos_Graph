@@ -3,7 +3,6 @@
 #include <iterator>
 #include "BFSGraph.h"
 #include <vector>
-//#include "BFSGraph.cpp"
 
 using namespace std;
 class Traversal {

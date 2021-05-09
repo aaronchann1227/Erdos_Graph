@@ -29,7 +29,7 @@ Graph makeGraph() {
 /////TESTS for Graph Structure
 
 //1. Check number of Edros’s neighbors == 512
-TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
+TEST_CASE("Check number of Erdos’s neighbors", "[weight=1]") {
 
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
@@ -37,7 +37,7 @@ TEST_CASE("Check number of Erdos’s neighbors", "[weight=1][part=1]") {
 }
 
 // 2. Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8
-TEST_CASE("Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8", "[weight=1][part=1]") {
+TEST_CASE("Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8", "[weight=1]") {
   
   Graph graph = makeGraph();
   Vertex* baker = graph.getVertex("LACAMPAGNE, CAROLE BAKER");
@@ -46,7 +46,7 @@ TEST_CASE("Check num of LACAMPAGNE, CAROLE BAKER neighbors == 8", "[weight=1][pa
 }
 
 // 3. Check num of LARSON, JEAN ANN neighbors == 17
-TEST_CASE("Check num of LARSON, JEAN ANN neighbors == 17", "[weight=1][part=1]") {
+TEST_CASE("Check num of LARSON, JEAN ANN neighbors == 17", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* ann = graph.getVertex("LARSON, JEAN ANN");
 
@@ -54,7 +54,7 @@ TEST_CASE("Check num of LARSON, JEAN ANN neighbors == 17", "[weight=1][part=1]")
 }
 
 // 4. Check num of Steprans, Juris neighbors == 4?
-TEST_CASE("Check num of Steprans, Juris neighbors == 4", "[weight=1][part=1]") {
+TEST_CASE("Check num of Steprans, Juris neighbors == 4", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* juris = graph.getVertex("Steprans, Juris");
 
@@ -62,14 +62,14 @@ TEST_CASE("Check num of Steprans, Juris neighbors == 4", "[weight=1][part=1]") {
 }
 
 // 5. Check num of Drake, Nathan neighbors == 2?
-TEST_CASE("Check num of Drake, Nathan neighbors == 2", "[weight=1][part=1]") {
+TEST_CASE("Check num of Drake, Nathan neighbors == 2", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* natha = graph.getVertex("Drake, Nathan");
   REQUIRE (2 == natha->getEdge().size());
 }
 
 // 6. (Erdos find leaf) case1: try the path Erdos -> ABBOTT, HARVEY LESLIE -> Zhou, Bing
-TEST_CASE("Erdos to leaf case 1", "[weight=1][part=1]") {
+TEST_CASE("Erdos to leaf case 1", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* leslie = graph.getVertex("ABBOTT, HARVEY LESLIE");
@@ -85,7 +85,7 @@ TEST_CASE("Erdos to leaf case 1", "[weight=1][part=1]") {
 }
 
 // 7. (Erdos find leaf) case2: try the path Erdos -> ASHBACHER, CHARLES D. -> Neirynck, Lori
-TEST_CASE("Erdos to leaf case 2", "[weight=1][part=1]") {
+TEST_CASE("Erdos to leaf case 2", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* charles = graph.getVertex("ASHBACHER, CHARLES D.");
@@ -101,7 +101,7 @@ TEST_CASE("Erdos to leaf case 2", "[weight=1][part=1]") {
 }
 
 // 8. (Leaf find Erdos) case1: try the path  Fraley, Chris -> BABU, GUTTI JOGESH -> Erdos
-TEST_CASE("Leaf to Erdos 1", "[weight=1][part=1]") {
+TEST_CASE("Leaf to Erdos 1", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* chris = graph.getVertex("Fraley, Chris");
@@ -117,7 +117,7 @@ TEST_CASE("Leaf to Erdos 1", "[weight=1][part=1]") {
 }
 
 // 9. (Leaf find Erdos) case2:  try the path  Bannai, Eiichi ->CAMERON, PETER JEPHSON -> Erdos
-TEST_CASE("Leaf to Erdos 2", "[weight=1][part=1]") {
+TEST_CASE("Leaf to Erdos 2", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* eiichi = graph.getVertex("Bannai, Eiichi");
@@ -133,7 +133,7 @@ TEST_CASE("Leaf to Erdos 2", "[weight=1][part=1]") {
 }
 
 // 10. (Cross path find leaf): try Erdos -> CANFIELD, EARL RODNEY -> GRANVILLE, ANDREW JAMES -> Cai, Tian Xin
-TEST_CASE("Cross path find leaf", "[weight=1][part=1]") {
+TEST_CASE("Cross path find leaf", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* rodney = graph.getVertex("CANFIELD, EARL RODNEY");
@@ -154,7 +154,7 @@ TEST_CASE("Cross path find leaf", "[weight=1][part=1]") {
 }
 
 // 11. (Complicated Cross path Erdos cycle): Erdos -> GUNDERSON, DAVID SHANE -> HINDMAN, NEIL BRUCE -> Farah, Ilijas -> MAGIDOR, MENACHEM -> Erdos
-TEST_CASE("Cross path find leaf2", "[weight=1][part=1]") {
+TEST_CASE("Cross path find leaf2", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Vertex* shane = graph.getVertex("GUNDERSON, DAVID SHANE");
@@ -184,7 +184,7 @@ TEST_CASE("Cross path find leaf2", "[weight=1][part=1]") {
 }
 
 // 12. Check weight of HALL, RICHARD ROXBY == formula(14)
-TEST_CASE("Check weight 1", "[weight=1][part=1]") {
+TEST_CASE("Check weight 1", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Edge* roxbyEdge = root->getEdge("HALL, RICHARD ROXBY");
@@ -192,7 +192,7 @@ TEST_CASE("Check weight 1", "[weight=1][part=1]") {
 }
 
 // 13. Check weight of SZEMEREDI, ENDRE == formula(29)
-TEST_CASE("Check weight 2", "[weight=1][part=1]") {
+TEST_CASE("Check weight 2", "[weight=1]") {
   Graph graph = makeGraph();
   Vertex* root = graph.getRoot();
   Edge* endreEdge = root->getEdge("SZEMEREDI, ENDRE");
@@ -202,7 +202,7 @@ TEST_CASE("Check weight 2", "[weight=1][part=1]") {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////TESTS for BFS
 
-TEST_CASE("BFS maintains the correct point on top", "[weight=1][part=1]") {
+TEST_CASE("BFS maintains the correct point on top", "[weight=1]") {
   Graph graph = makeGraph();
 
   Vertex* erdos = graph.getRoot();
@@ -211,7 +211,7 @@ TEST_CASE("BFS maintains the correct point on top", "[weight=1][part=1]") {
   REQUIRE( erdos->getAuthor() == (*traversal)->getAuthor());
 }
 
-TEST_CASE("BFS operator++", "[weight=0][part=1]") {
+TEST_CASE("BFS operator++", "[weight=1]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
@@ -221,7 +221,7 @@ TEST_CASE("BFS operator++", "[weight=0][part=1]") {
   REQUIRE( (*Traversal)->getAuthor() == "ABBOTT, HARVEY LESLIE" );
 }
 
-TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=1][part=1][part=1b]") {
+TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=1][part=1b]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
@@ -241,7 +241,7 @@ TEST_CASE("BFS operator++ (Checking if Erdos is visited twice)", "[weight=1][par
   REQUIRE( check == false );
 }
 
-TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=1][part=1]") {
+TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[weight=1]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
@@ -254,7 +254,7 @@ TEST_CASE("BFS operator++ (Checking if every node is visited exactly once)", "[w
   REQUIRE( count == graph.getSize() );
 }
 
-TEST_CASE("print 10 BFSvisited", "[weight=0][part=1]") {
+TEST_CASE("print 10 BFSvisited", "[weight=1]") {
   Graph graph=makeGraph();
   Vertex* Erdos = graph.getRoot();
   Traversal Traversal(graph, Erdos);
@@ -281,7 +281,7 @@ TEST_CASE("Check num of Edges Kruskal return", "[weight=1]") {
   REQUIRE( graph.getSize() - 1 == KruskalEdgeVec.size() );
 }
 
-TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
+TEST_CASE("Test Kruskal on small Erdos graph", "[weight=1]") {
   std::vector< std::vector<std::string> > testErdosVec;
 
   testErdosVec.push_back(vector<string> {"ANDRASFAI, BELA","SOS, VERA TURAN"});
@@ -300,7 +300,7 @@ TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
   }
 
   REQUIRE( testGraph.getSize() - 1 == KruskalEdgeVec.size() );
-  REQUIRE( (abs(sum1-expected_weight)) < 0.001);
+  REQUIRE( (abs(sum1-expected_weight)) < 0.0001);
 }
 
 TEST_CASE("Test Kruskal on small Erdos graph (2)", "[weight = 1]") {
@@ -324,7 +324,7 @@ TEST_CASE("Test Kruskal on small Erdos graph (2)", "[weight = 1]") {
   }
 
   REQUIRE( testGraph2.getSize() - 1 == KruskalEdgeVec2.size() );
-  REQUIRE( (abs(sum2-expected_weight2)) < 0.001);
+  REQUIRE( (abs(sum2-expected_weight2)) < 0.0001);
 }
 
 TEST_CASE("Test Kruskal on small Erdos graph (3)", "[weight=1]") {
@@ -344,7 +344,7 @@ TEST_CASE("Test Kruskal on small Erdos graph (3)", "[weight=1]") {
   }
 
   REQUIRE( testGraph3.getSize() - 1 == KruskalEdgeVec3.size() );
-  REQUIRE( (abs(sum3-expected_weight3)) < 0.001);
+  REQUIRE( (abs(sum3-expected_weight3)) < 0.0001);
 }
 
 TEST_CASE("Testing Kruskal on the entire Graph", "[weight=1]") {
