@@ -186,7 +186,7 @@ float fa(unsigned x, unsigned k){
 }
 
 float fr(unsigned x, unsigned k){
-    return k*k/x;
+    return k*k/(x+0.0001);
 }
 
 float magnitude(std::pair<unsigned int, unsigned int> delta){
@@ -206,7 +206,7 @@ Animation Graph::BCVisualize() {
            coordinates.push_back(std::pair<unsigned int, unsigned int>((width / 2), (length / 2)));
      
         } else {
-            coordinates.push_back(std::pair<unsigned int, unsigned int>(((v->getID() * 4) % width), ((v->getID() * 4) /width)));
+            coordinates.push_back(std::pair<unsigned int, unsigned int>(((v->getID() * 50) % width), ((v->getID() * 50) /width)));
         }
     }
     displacement.resize(coordinates.size());
@@ -231,23 +231,23 @@ Animation Graph::BCVisualize() {
             unsigned int cord3=coordinates[getVertex(e->vertex1)->getID()].first-coordinates[getVertex(e->vertex2)->getID()].first;
             unsigned int cord4=coordinates[getVertex(e->vertex1)->getID()].second-coordinates[getVertex(e->vertex2)->getID()].second;
             std::pair<unsigned int, unsigned int> delta(cord3, cord4);
-            displacement[v1id].first-=(delta.first/magnitude(delta)) * fa(magnitude(delta), k);
-            displacement[v1id].second-=(delta.second/magnitude(delta)) * fa(magnitude(delta), k);
-            displacement[v2id].first+=(delta.first/magnitude(delta)) * fa(magnitude(delta), k);
-            displacement[v2id].second+=(delta.second/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v1id].first -= (delta.first/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v1id].second -= (delta.second/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v2id].first += (delta.first/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v2id].second += (delta.second/magnitude(delta)) * fa(magnitude(delta), k);
         }
         for (Vertex* v : vertices){
             int ID = v->getID();
-            coordinates[ID].first+=(displacement[ID].first/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
-            coordinates[ID].second+=(displacement[ID].second/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
+            coordinates[ID].first += (displacement[ID].first/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
+            coordinates[ID].second += (displacement[ID].second/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
             coordinates[ID].first = min(width, std::max(c, coordinates[ID].first)); 
             coordinates[ID].second = min(length, std::max(c, coordinates[ID].second));
         }
 
         PNG png(width, length);
         for (unsigned int i = 0; i < coordinates.size(); i++) {
-            unsigned int xPos = coordinates[i].first;
-            unsigned int yPos = coordinates[i].second;
+            unsigned int xPos = coordinates[i].first % width;
+            unsigned int yPos = coordinates[i].second % length;
             unsigned int color = (rand() * 360 / 100)  % 360;
             unsigned int radius = 3;
             if (authorToPaper_.find(vertices[i]->getAuthor()) != authorToPaper_.end() ) {
@@ -266,33 +266,33 @@ Animation Graph::BCVisualize() {
                     }
                 }
             }
-            for (Edge* edge : vertices[i]->getEdge()) {
-               Vertex* target = getVertex(edge->vertex2);
-               if (vertices[i] == target) {
-                   target = getVertex(edge->vertex1);
-               }
-               unsigned int targetX = coordinates[target->getID()].first;
-               unsigned int targetY = coordinates[target->getID()].second;
-               unsigned int dy = yPos - targetY; 
-               unsigned int dx = xPos - targetX; 
-               if (dy > dx) {
-                   for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
-                       unsigned int currentX = targetX + (yM - targetY) * dx / dy;
-                        HSLAPixel & pixel = png.getPixel(currentX, yM);
-                        pixel.h = (rand() * 36) % 360;
-                        pixel.l = 0.6;
-                        pixel.s = 0.5;
-                   }
-               } else {
-                   for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
-                       unsigned int currentY = targetY + (xM - targetX) * dy / dx;
-                       HSLAPixel & pixel = png.getPixel(xM, currentY);
-                       pixel.h = (rand() * 36) % 360;
-                       pixel.l = 0.6;
-                       pixel.s = 0.5;
-                   }
-               }               
-            }
+            // for (Edge* edge : vertices[i]->getEdge()) {
+            //    Vertex* target = getVertex(edge->vertex2);
+            //    if (vertices[i] == target) {
+            //        target = getVertex(edge->vertex1);
+            //    }
+            //    unsigned int targetX = coordinates[target->getID()].first % width;
+            //    unsigned int targetY = coordinates[target->getID()].second % length;
+            //    unsigned int dy = yPos - targetY; 
+            //    unsigned int dx = xPos - targetX; 
+            //    if (dy > dx) {
+            //        for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
+            //            unsigned int currentX = targetX + (yM - targetY) * dx / dy;
+            //             HSLAPixel & pixel = png.getPixel(currentX, yM);
+            //             pixel.h = (rand() * 36) % 360;
+            //             pixel.l = 0.6;
+            //             pixel.s = 0.5;
+            //        }
+            //    } else {
+            //        for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
+            //            unsigned int currentY = targetY + (xM - targetX) * dy / dx;
+            //            HSLAPixel & pixel = png.getPixel(xM, currentY);
+            //            pixel.h = (rand() * 36) % 360;
+            //            pixel.l = 0.6;
+            //            pixel.s = 0.5;
+            //        }
+            //    }               
+            // }
         }
         animation.addFrame(png);
 
