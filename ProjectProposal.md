@@ -9,11 +9,9 @@ For this project, we plan to use the data set from Oakland University database o
 ### Graph Algorithms
 We are planning to be covering the Breadth First Search Algorithm. The Breadth First Search Algorithm will take in a directed/undirected graph with unweighted edge weights (or edge weights of 1) and gives a path as an output through the graph. Because we are using the data set from https://oakland.edu/enp/thedata/, we predict that all of the edge weighted and decided based on the number of publications the person had with Erdos, the nodes of the graph will contain information of the name of the author as well as pointers to other nodes that have been co-authors of the same node. Two nodes are connected when they are co-authors to a paper. The BFS will have a run time of O(V + E) where V is the number of vertices and E is the number of edges. 
 
-For one of our algorithms, we propose implementing Dijikstra's Algorithm. The input will be the center Node (Erdos) and the node that we would like to find the Erdos number of. We expect the output to be the shortest path with the smallest amount of connections starting from Erdos to a certain researcher.
+For one of our algorithms, we propose implementing Kruskal's Algorithm. This will be a class method and will return a vector of edges that connect a Minimum Spanning Tree. One can use this vector of Edges and the Vertices of the graph to construct a Kruskal Minimum Spanning Tree. This running time of the Kruskal Minimum Spanning Tree Algorithm should be O(n + mlog(n) + m) if it was implemented using a sorted array.
 
-For our final algorithm, we propose projecting our found shortest path (subgraph) onto a world map, using the names of authors. We will 
-map the shortest path from Erdos to a certain author, and then project our graph. We expect the input to be the shortest path
-found using our Dijikstra's Algorithm implementation.
+For our final algorithm, we are planning on implementing a visualization algorithm presented by Kobourov: Barycentric method. source- http://cs.brown.edu/people/rtamassi/gdhandbook/chapters/force-directed.pdf The expected output would be a position vector for each vertex and we would then project it onto a PNG. We are hoping to use this visualization algorithm to project the Kruskal minimum spanning tree onto a PNG. The running time of the visualization algorithm should be O(n^3).
 
 
 ### Tentative Timeline
