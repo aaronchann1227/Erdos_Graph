@@ -11,7 +11,7 @@ We are planning to be covering the Breadth First Search Algorithm. The Breadth F
 
 For one of our algorithms, we propose implementing Kruskal's Algorithm. This will be a class method and will return a vector of edges that connect a Minimum Spanning Tree. One can use this vector of Edges and the Vertices of the graph to construct a Kruskal Minimum Spanning Tree. This running time of the Kruskal Minimum Spanning Tree Algorithm should be O(n + mlog(n) + m) if it was implemented using a sorted array.
 
-For our final algorithm, we are planning on implementing a visualization algorithm presented by Kobourov: Barycentric method. source- http://cs.brown.edu/people/rtamassi/gdhandbook/chapters/force-directed.pdf The expected output would be a position vector for each vertex and we would then project it onto a PNG. We are hoping to use this visualization algorithm to project the Kruskal minimum spanning tree onto a PNG. The running time of the visualization algorithm should be O($n^3$)
+For our final algorithm, we are planning on implementing a visualization algorithm presented by Kobourov: Barycentric method. source- http://cs.brown.edu/people/rtamassi/gdhandbook/chapters/force-directed.pdf The expected output would be a position vector for each vertex and we would then project it onto a PNG. We are hoping to use this visualization algorithm to project the Kruskal minimum spanning tree onto a PNG. The running time of the visualization algorithm should be O(n^3).
 
 
 ### Tentative Timeline
