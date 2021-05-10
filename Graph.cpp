@@ -193,7 +193,7 @@ float magnitude(std::pair<unsigned int, unsigned int> delta){
     return pow((delta.first*delta.first)+(delta.second*delta.second),0.5);
 }
 
-Animation Graph::BCVisualize() {
+std::vector<std::pair<unsigned int, unsigned int>> Graph::BCVisualize() {
     Animation animation;
     unsigned k = pow(Area/vertices.size(), 0.5);
     float t = 10;
@@ -206,97 +206,96 @@ Animation Graph::BCVisualize() {
            coordinates.push_back(std::pair<unsigned int, unsigned int>((width / 2), (length / 2)));
      
         } else {
-            coordinates.push_back(std::pair<unsigned int, unsigned int>(((v->getID() * 50) % width), ((v->getID() * 50) /width)));
+            coordinates.push_back(std::pair<unsigned int, unsigned int>((v->getID() * rand() * 42) % width, (v->getID() * rand() * rand() * 50) % width + rand()));
         }
     }
     displacement.resize(coordinates.size());
-    for (int i = 0; i<10; i++) {
+    for (int i = 0; i<1; i++) {
         for (Vertex* v : vertices){
             std::pair<unsigned int, unsigned int> vdisp(0,0);
             for (Vertex* u : vertices){
-                if (v == u) {
-                    continue;
+                if (v != u) {
+                    unsigned int cord1=coordinates[v->getID()].first-coordinates[u->getID()].first;
+                    unsigned int cord2=coordinates[v->getID()].second-coordinates[u->getID()].second;
+                    std::pair<unsigned int, unsigned int> delta(cord1, cord2);
+                    vdisp.first+=(delta.first/magnitude(delta)) * fr(magnitude(delta), k);
+                    vdisp.second+=(delta.second/magnitude(delta)) * fr(magnitude(delta), k);
+                    displacement[v->getID()]=(vdisp);
                 }
-                unsigned int cord1=coordinates[v->getID()].first-coordinates[u->getID()].first;
-                unsigned int cord2=coordinates[v->getID()].second-coordinates[u->getID()].second;
-                std::pair<unsigned int, unsigned int> delta(cord1, cord2);
-                vdisp.first+=(delta.first/magnitude(delta)) * fr(magnitude(delta), k);
-                vdisp.second+=(delta.second/magnitude(delta)) * fr(magnitude(delta), k);
-                displacement[v->getID()]=(vdisp);
             }
         }
         for (Edge* e : wholeEdges){
-            int v1id=getVertex(e->vertex1)->getID();
-            int v2id=getVertex(e->vertex2)->getID();
-            unsigned int cord3=coordinates[getVertex(e->vertex1)->getID()].first-coordinates[getVertex(e->vertex2)->getID()].first;
-            unsigned int cord4=coordinates[getVertex(e->vertex1)->getID()].second-coordinates[getVertex(e->vertex2)->getID()].second;
+            int v1id = getVertex(e->vertex1)->getID();
+            int v2id = getVertex(e->vertex2)->getID();
+            unsigned int cord3 = coordinates[getVertex(e->vertex1)->getID()].first - coordinates[getVertex(e->vertex2)->getID()].first;
+            unsigned int cord4 = coordinates[getVertex(e->vertex1)->getID()].second - coordinates[getVertex(e->vertex2)->getID()].second;
             std::pair<unsigned int, unsigned int> delta(cord3, cord4);
-            displacement[v1id].first -= (delta.first/magnitude(delta)) * fa(magnitude(delta), k);
-            displacement[v1id].second -= (delta.second/magnitude(delta)) * fa(magnitude(delta), k);
-            displacement[v2id].first += (delta.first/magnitude(delta)) * fa(magnitude(delta), k);
-            displacement[v2id].second += (delta.second/magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v1id].first -= (delta.first / magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v1id].second -= (delta.second / magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v2id].first += (delta.first / magnitude(delta)) * fa(magnitude(delta), k);
+            displacement[v2id].second += (delta.second / magnitude(delta)) * fa(magnitude(delta), k);
         }
         for (Vertex* v : vertices){
             int ID = v->getID();
-            coordinates[ID].first += (displacement[ID].first/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
-            coordinates[ID].second += (displacement[ID].second/magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
+            coordinates[ID].first += (displacement[ID].first / magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
+            coordinates[ID].second += (displacement[ID].second / magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
             coordinates[ID].first = min(width, std::max(c, coordinates[ID].first)); 
             coordinates[ID].second = min(length, std::max(c, coordinates[ID].second));
         }
 
-        PNG png(width, length);
-        for (unsigned int i = 0; i < coordinates.size(); i++) {
-            unsigned int xPos = coordinates[i].first % width;
-            unsigned int yPos = coordinates[i].second % length;
-            unsigned int color = (rand() * 360 / 100)  % 360;
-            unsigned int radius = 3;
-            if (authorToPaper_.find(vertices[i]->getAuthor()) != authorToPaper_.end() ) {
-                radius = authorToPaper_[vertices[i]->getAuthor()];
-            }
-            if (i == 0) {
-                radius = 60;
-            }
-            for (unsigned int x = xPos - radius; x < 2 * radius; x++) {
-                for (unsigned int y = yPos - radius; y < 2 * radius; y++) {
-                    if (sqrt(x*x + y*y) <= radius) {
-                        HSLAPixel & pixel = png.getPixel(x, y);
-                        pixel.h = color;
-                        pixel.l = 0.6;
-                        pixel.s = 0.5; 
-                    }
-                }
-            }
-            // for (Edge* edge : vertices[i]->getEdge()) {
-            //    Vertex* target = getVertex(edge->vertex2);
-            //    if (vertices[i] == target) {
-            //        target = getVertex(edge->vertex1);
-            //    }
-            //    unsigned int targetX = coordinates[target->getID()].first % width;
-            //    unsigned int targetY = coordinates[target->getID()].second % length;
-            //    unsigned int dy = yPos - targetY; 
-            //    unsigned int dx = xPos - targetX; 
-            //    if (dy > dx) {
-            //        for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
-            //            unsigned int currentX = targetX + (yM - targetY) * dx / dy;
-            //             HSLAPixel & pixel = png.getPixel(currentX, yM);
-            //             pixel.h = (rand() * 36) % 360;
-            //             pixel.l = 0.6;
-            //             pixel.s = 0.5;
-            //        }
-            //    } else {
-            //        for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
-            //            unsigned int currentY = targetY + (xM - targetX) * dy / dx;
-            //            HSLAPixel & pixel = png.getPixel(xM, currentY);
-            //            pixel.h = (rand() * 36) % 360;
-            //            pixel.l = 0.6;
-            //            pixel.s = 0.5;
-            //        }
-            //    }               
-            // }
-        }
-        animation.addFrame(png);
+        // PNG png(width, length);
+        // for (unsigned int i = 0; i < coordinates.size(); i++) {
+        //     unsigned int xPos = coordinates[i].first % width;
+        //     unsigned int yPos = coordinates[i].second % length;
+        //     unsigned int color = (rand() * 360 / 100)  % 360;
+        //     unsigned int radius = 3;
+        //     if (authorToPaper_.find(vertices[i]->getAuthor()) != authorToPaper_.end() ) {
+        //         radius = authorToPaper_[vertices[i]->getAuthor()];
+        //     }
+        //     if (i == 0) {
+        //         radius = 60;
+        //     }
+        //     for (unsigned int x = xPos - radius; x < 2 * radius; x++) {
+        //         for (unsigned int y = yPos - radius; y < 2 * radius; y++) {
+        //             if (sqrt(x*x + y*y) <= radius) {
+        //                 HSLAPixel & pixel = png.getPixel(x, y);
+        //                 pixel.h = color;
+        //                 pixel.l = 0.6;
+        //                 pixel.s = 0.5; 
+        //             }
+        //         }
+        //     }
+        //     // for (Edge* edge : vertices[i]->getEdge()) {
+        //     //    Vertex* target = getVertex(edge->vertex2);
+        //     //    if (vertices[i] == target) {
+        //     //        target = getVertex(edge->vertex1);
+        //     //    }
+        //     //    unsigned int targetX = coordinates[target->getID()].first % width;
+        //     //    unsigned int targetY = coordinates[target->getID()].second % length;
+        //     //    unsigned int dy = yPos - targetY; 
+        //     //    unsigned int dx = xPos - targetX; 
+        //     //    if (dy > dx) {
+        //     //        for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
+        //     //            unsigned int currentX = targetX + (yM - targetY) * dx / dy;
+        //     //             HSLAPixel & pixel = png.getPixel(currentX, yM);
+        //     //             pixel.h = (rand() * 36) % 360;
+        //     //             pixel.l = 0.6;
+        //     //             pixel.s = 0.5;
+        //     //        }
+        //     //    } else {
+        //     //        for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
+        //     //            unsigned int currentY = targetY + (xM - targetX) * dy / dx;
+        //     //            HSLAPixel & pixel = png.getPixel(xM, currentY);
+        //     //            pixel.h = (rand() * 36) % 360;
+        //     //            pixel.l = 0.6;
+        //     //            pixel.s = 0.5;
+        //     //        }
+        //     //    }               
+        //     // }
+        // }
+        // animation.addFrame(png);
 
         t *= 0.9;
     }
-    return animation;
+    return coordinates;
 }

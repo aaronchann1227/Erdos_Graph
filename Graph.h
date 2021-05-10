@@ -85,7 +85,8 @@ class Graph {
         /**
         * THE BARYCENTRIC METHOD to visualize the Graph
         */
-        Animation BCVisualize();
+        
+        std::vector<std::pair<unsigned int, unsigned int>> BCVisualize();
 
 
         
