@@ -23,12 +23,13 @@ int main() {
     Graph graph(readErdos(), createAuthorToPaper());
 
     
-    std::vector<std::pair<unsigned int, unsigned int>> animation = graph.BCVisualize();
+    PNG animation = graph.BCVisualize();
 
-    for (unsigned int i = 0; i < 100; i++) {
-        cout << animation[i].first << endl;
-        cout << animation[i].second << endl;
-    }
+    /* for (unsigned int i = 0; i < 100; i++) {
+        //cout << animation[i].first << endl;
+        //cout << animation[i].second << endl;
+    } */
+    animation.writeToFile("ErdosPNG.png");
 
     return 0;
 }

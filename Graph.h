@@ -86,7 +86,7 @@ class Graph {
         * THE BARYCENTRIC METHOD to visualize the Graph
         */
         
-        std::vector<std::pair<unsigned int, unsigned int>> BCVisualize();
+        PNG BCVisualize();
 
 
         
@@ -114,13 +114,13 @@ class Graph {
         std::vector< std::vector<std::string> > erdosVec_;
 
         // length of the visualization figure (constant)
-        unsigned int length = 1000;
+        int length = 1000;
 
         // width of the visualization figure (constant)
-        unsigned int width = 1000;
+        int width = 1000;
 
         // area of the visualization figure (constant)
-        unsigned int Area = length*width;
+        int Area = length*width;
 
 };
 
@@ -142,4 +142,4 @@ float fr(unsigned x, unsigned k);
 /**
 * helper function of BCVisualize() to calculate the magnitude
 */
-float magnitude(std::pair<unsigned int, unsigned int> delta);
+float magnitude(std::pair<int, int> delta);
