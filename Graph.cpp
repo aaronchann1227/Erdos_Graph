@@ -206,7 +206,7 @@ Animation Graph::BCVisualize() {
            coordinates.push_back(std::pair<unsigned int, unsigned int>((width / 2), (length / 2)));
      
         } else {
-            coordinates.push_back(std::pair<unsigned int, unsigned int>(((v->getID() * rand() * 100) % width), ((v->getID() * 100 * rand()) %length)));
+            coordinates.push_back(std::pair<unsigned int, unsigned int>(((v->getID() * 4) % width), ((v->getID() * 4) /width)));
         }
     }
     displacement.resize(coordinates.size());
