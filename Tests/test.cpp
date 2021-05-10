@@ -4,6 +4,7 @@
 #include "../ErdosRead.cpp"
 #include "../Traversal.h"
 #include "../Traversal.cpp"
+#include "../cs225/PNG.h"
 
 #include <iostream>
 #include <fstream>

@@ -214,6 +214,9 @@ Animation Graph::BCVisualize() {
         for (Vertex* v : vertices){
             std::pair<unsigned int, unsigned int> vdisp(0,0);
             for (Vertex* u : vertices){
+                if (v == u) {
+                    continue;
+                }
                 unsigned int cord1=coordinates[v->getID()].first-coordinates[u->getID()].first;
                 unsigned int cord2=coordinates[v->getID()].second-coordinates[u->getID()].second;
                 std::pair<unsigned int, unsigned int> delta(cord1, cord2);
