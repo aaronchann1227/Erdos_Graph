@@ -43,7 +43,7 @@ HSLAPixel.o: cs225/HSLAPixel.h
 
 lodepng.o: cs225/lodepng/lodepng.h
 	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp		
-test: output_msg test.o catch/catchmain.cpp Graph.o Traversal.o DisjointSet.o
+test: output_msg test.o catch/catchmain.cpp Graph.o Traversal.o DisjointSet.o 
 	$(LD) -g catch/catchmain.cpp test.o Graph.o Traversal.o DisjointSet.o $(LDFLAGS) -o test
 
 test.o: Tests/test.cpp catch/catch.hpp Vertex.h Edge.h
