@@ -15,15 +15,20 @@
 #include "ErdosRead.cpp"
 #include "Graph.h"
 #include "Animation.h"
-using namespace std;
+using std::cout;
+using std::endl;
 
 int main() {
     
     Graph graph(readErdos(), createAuthorToPaper());
 
-    Animation animation = graph.BCVisualize();
+    
+    std::vector<std::pair<unsigned int, unsigned int>> animation = graph.BCVisualize();
 
-    animation.write("ErdosVisualzied.gif");
+    for (unsigned int i = 0; i < 100; i++) {
+        cout << animation[i].first << endl;
+        cout << animation[i].second << endl;
+    }
 
     return 0;
 }
