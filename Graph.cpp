@@ -2,6 +2,12 @@
 #include <iostream>
 #include "DisjointSet.h"
 #include <algorithm>
+#include <math.h>
+#include "cs225/PNG.h"
+
+#include "Animation.h"
+
+using namespace cs225;
 using namespace std;
 void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
@@ -182,28 +188,27 @@ float fr(unsigned x, unsigned k){
 }
 
 float magnitude(std::pair<unsigned int, unsigned int> delta){
-    return std::pow((delta.first*delta.first)+(delta.second*delta.second),0.5);
+    return pow((delta.first*delta.first)+(delta.second*delta.second),0.5);
 }
 
-std::vector<std::pair<unsigned int, unsigned int>> Graph::BCVisualize(){
-    unsigned k = std::pow(Area/vertices.size(), 0.5);
-    float t=10;
+Animation Graph::BCVisualize() {
+    Animation animation;
+    unsigned k = pow(Area/vertices.size(), 0.5);
+    float t = 10;
     unsigned int c=0;
     std::vector<std::pair<unsigned int, unsigned int>> coordinates;
     std::vector<std::pair<unsigned int, unsigned int>> displacement;
-    /* std::vector<int> numbers;
 
-    for(int i=0; i<vertices.size(); i++)       // add 0-99 to the vector
-        numbers.push_back(i);
-
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(seed)); */
-
-    for (Vertex* v : vertices){
-            coordinates.push_back(std::pair<unsigned int, unsigned int>((v->getID()%width), (v->getID()/width)));
+    for (Vertex* v : vertices) {
+        if (v->getID() == 0) {
+           coordinates.push_back(std::pair<unsigned int, unsigned int>((width / 2), (length / 2)));
+     
+        } else {
+            coordinates.push_back(std::pair<unsigned int, unsigned int>(((v->getID() * rand() * 100) % width), ((v->getID() * 100 * rand()) %length)));
+        }
     }
     displacement.resize(coordinates.size());
-    for (int i = 0; i<10; i++){
+    for (int i = 0; i<10; i++) {
         for (Vertex* v : vertices){
             std::pair<unsigned int, unsigned int> vdisp(0,0);
             for (Vertex* u : vertices){
@@ -233,7 +238,60 @@ std::vector<std::pair<unsigned int, unsigned int>> Graph::BCVisualize(){
             coordinates[ID].first = min(width, std::max(c, coordinates[ID].first)); 
             coordinates[ID].second = min(length, std::max(c, coordinates[ID].second));
         }
-    t*=0.9;
+
+        PNG png(width, length);
+        for (unsigned int i = 0; i < coordinates.size(); i++) {
+            unsigned int xPos = coordinates[i].first;
+            unsigned int yPos = coordinates[i].second;
+            unsigned int color = (rand() * 360 / 100)  % 360;
+            unsigned int radius = 3;
+            if (authorToPaper_.find(vertices[i]->getAuthor()) != authorToPaper_.end() ) {
+                radius = authorToPaper_[vertices[i]->getAuthor()];
+            }
+            if (i == 0) {
+                radius = 60;
+            }
+            for (unsigned int x = xPos - radius; x < 2 * radius; x++) {
+                for (unsigned int y = yPos - radius; y < 2 * radius; y++) {
+                    if (sqrt(x*x + y*y) <= radius) {
+                        HSLAPixel & pixel = png.getPixel(x, y);
+                        pixel.h = color;
+                        pixel.l = 0.6;
+                        pixel.s = 0.5; 
+                    }
+                }
+            }
+            for (Edge* edge : vertices[i]->getEdge()) {
+               Vertex* target = getVertex(edge->vertex2);
+               if (vertices[i] == target) {
+                   target = getVertex(edge->vertex1);
+               }
+               unsigned int targetX = coordinates[target->getID()].first;
+               unsigned int targetY = coordinates[target->getID()].second;
+               unsigned int dy = yPos - targetY; 
+               unsigned int dx = xPos - targetX; 
+               if (dy > dx) {
+                   for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
+                       unsigned int currentX = targetX + (yM - targetY) * dx / dy;
+                        HSLAPixel & pixel = png.getPixel(currentX, yM);
+                        pixel.h = (rand() * 36) % 360;
+                        pixel.l = 0.6;
+                        pixel.s = 0.5;
+                   }
+               } else {
+                   for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
+                       unsigned int currentY = targetY + (xM - targetX) * dy / dx;
+                       HSLAPixel & pixel = png.getPixel(xM, currentY);
+                       pixel.h = (rand() * 36) % 360;
+                       pixel.l = 0.6;
+                       pixel.s = 0.5;
+                   }
+               }               
+            }
+        }
+        animation.addFrame(png);
+
+        t *= 0.9;
     }
-    return coordinates;
+    return animation;
 }

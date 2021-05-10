@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include "Edge.h"
 #include "Vertex.h"
-
+#include "Animation.h"
 class Graph {
     public:
 
@@ -78,7 +78,9 @@ class Graph {
         * find method that uses Kruskal's algorithm to find a list of Edges that connects a minimum spanning tree.
         */
         std::vector<Edge*> KruskalMST();
-        std::vector<std::pair<unsigned int, unsigned int>> BCVisualize();
+
+        
+        Animation BCVisualize();
 
         
     

@@ -281,7 +281,7 @@ TEST_CASE("Check num of Edges Kruskal return", "[weight=1]") {
   REQUIRE( graph.getSize() - 1 == KruskalEdgeVec.size() );
 }
 
-TEST_CASE("Test Kruskal on small Erdos graph", "[weight=0]") {
+TEST_CASE("Test Kruskal on small Erdos graph", "[weight=1]") {
   std::vector< std::vector<std::string> > testErdosVec;
 
   testErdosVec.push_back(vector<string> {"ANDRASFAI, BELA","SOS, VERA TURAN"});
