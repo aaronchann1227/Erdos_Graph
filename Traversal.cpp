@@ -49,8 +49,16 @@ bool Traversal::T_done(){
  * Returns current vertex in Traversal.
  */
 
-
 Vertex* Traversal::operator*(){
     return bfs.peek();
 }
 
+
+/**
+ * function to print out the result of BFS
+ */
+void Traversal::printBFSvisited(unsigned itr) {
+    for (size_t i = 0; i < itr; i++) {
+    cout << BFSvisited[i] << endl;
+  }
+}

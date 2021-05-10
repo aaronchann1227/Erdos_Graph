@@ -9,6 +9,7 @@
 
 using namespace cs225;
 using namespace std;
+
 void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
     //Initializes the root of the graph
     this->authorToPaper_ = authorToPaper;
@@ -147,6 +148,7 @@ std::vector< Edge* > Graph::getWholeEdge() {
 std::vector< Vertex* > Graph::getWholeVertex() {
     return vertices;
 }
+
 bool compareEdges(Edge* edge1, Edge* edge2) {return edge1->weight < edge2->weight;}
 ////////////////////////////////////////////////
 std::vector<Edge*> Graph::KruskalMST() {
