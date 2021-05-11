@@ -27,7 +27,7 @@ To test the Kruskal Algorithm, we first check that the number of edges it return
 
 Lastly, we included a visualization algorithm so that we have a human-readable output. To do this, we adopted Kobourov's Barycentric method for force-directed graph visualization. The total visualization consists of two algorithms. The first algorithm determines the position of each vertex; The second writes the result to a PNG. To determine the position of each vertex, we randomly assign coordinate to each vertex, and we calculate the attractive repulsive forces between the vertices to land each vertex in the best location. We did not write any test cases but we are confident that our visualization algorithm will correctly display the graph. 
 
-![Imgur](https://i.imgur.com/hwMSdC0.png)
+![Imgur](https://i.imgur.com/T9LaYLd.png)
 
 
 ![Imgur](https://i.imgur.com/8o05yf4.png)
