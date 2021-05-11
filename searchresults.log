@@ -82,15 +82,8 @@ class Graph {
         */
         std::vector<Edge*> KruskalMST();
 
-<<<<<<< HEAD
         
         Animation BCVisualize();
-=======
-        /**
-        * THE BARYCENTRIC METHOD to visualize the Graph
-        */
-        std::vector<std::pair<unsigned int, unsigned int>> BCVisualize();
->>>>>>> f40cfcdeda4d02323c53a35c3136574a471e4427
 
         
     

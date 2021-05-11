@@ -39,6 +39,9 @@ int main() {
 
     // We compared the number of edges Kruskal returns to expected number of edges Kruskal returns, which is n-1.
     std::vector<Edge*> KruskalEdgeVec = graph.KruskalMST();
+
+    cout << "The total number of edges of the Graph: "  << graph.getWholeEdge().size() << "\n";
+
     cout << "The number of edges KruskalMST() returns: "  << KruskalEdgeVec.size() << "\n";
 
     cout << "The expected number of edges: " << graph.getSize() - 1 << "\n";
@@ -61,6 +64,13 @@ int main() {
         resultEdgeWeight += edge->weight;
     }
 
+    float totalEdgeWeights = 0.0;
+    for (Edge* edge: graph.getWholeEdge()) {
+        totalEdgeWeights += edge->weight;
+    }
+
+    cout << "The total weight of all edges of the Graph: "  << totalEdgeWeights << "\n";
+    
     cout << "The total weight of all edges KruskalMST() returns: "  << resultEdgeWeight << "\n";
 
     cout << "The expected total weight of the spanning tree: "  << expectedTotalWeight << "\n";
