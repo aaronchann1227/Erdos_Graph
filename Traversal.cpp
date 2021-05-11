@@ -18,10 +18,14 @@ void Traversal::operator++(){
     Vertex* curr;
     curr=bfs.peek();
     bfs.myarr[0] = 1;
+    
+    // checking if the current has already been visited
     while ((!bfs.empty()) && (bfs.myarr[curr->getID()])) {
       Vertex* vertex=bfs.pop();
       curr=vertex;
     }
+
+    // adding all neighbors to traversal queue
     for (Edge* e : curr->getEdge()){
         if (e->vertex1==curr->getAuthor() && !bfs.myarr[bfs.getG().getVertex(e->vertex2)->getID()]){
             bfs.add(bfs.getG().getVertex(e->vertex2));
@@ -30,10 +34,11 @@ void Traversal::operator++(){
             bfs.add(bfs.getG().getVertex(e->vertex1));
         }
     }
+
+    // marking current as visited
     if ((!bfs.empty())){
       bfs.myarr[curr->getID()]=1;
       BFSvisited.push_back(curr->getAuthor());
-      //bfs.pop();
     }
 }
 
