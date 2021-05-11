@@ -85,7 +85,7 @@ class Graph {
         /**
         * Implements The Barycentric Method and writes result to a PNG file 
         */
-        PNG BCVisualize();
+        Animation BCVisualize();
 
 
         

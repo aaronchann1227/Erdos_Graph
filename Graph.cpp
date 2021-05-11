@@ -13,7 +13,7 @@
 using namespace cs225;
 using namespace std;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//--------------------------------------------------------------------------------------------
 // below are constructor, copy constructor, destructor, operator= and their helper functions.
 
 void Graph::constructGraphHelper(std::vector< std::vector<std::string> > erdosVec, std::unordered_map<std::string , unsigned int> authorToPaper) {
@@ -143,7 +143,7 @@ const Graph & Graph::operator=(Graph const & other) {
 }
 
 // above are constructor, copy constructor, destructor, operator= and their helper functions.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//--------------------------------------------------------------------------------------------
 // below are class utility methods
 
 // get the total number of vertices in the Graph
@@ -185,7 +185,7 @@ std::vector< Vertex* > Graph::getWholeVertex() {
 bool compareEdges(Edge* edge1, Edge* edge2) {return edge1->weight < edge2->weight;}
 
 // above are class utility methods
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------------------------------------------
 // below is Kruskal Minimum Spanning Tree algorithm
 std::vector<Edge*> Graph::KruskalMST() {
     // initialize and build the Disjoint Set O(n)
@@ -229,7 +229,7 @@ std::vector<Edge*> Graph::KruskalMST() {
 }
 
 // above is Kruskal Minimum Spanning Tree algorithm
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------------------------------
 // below is visualization algorithm: Barycentric method and its helper functions
 
 
@@ -257,7 +257,7 @@ float magnitude(std::pair<int, int> delta){
 /**
 * Implements The Barycentric Method and writes result to a PNG file 
 */
-PNG Graph::BCVisualize() {
+Animation Graph::BCVisualize() {
     Animation animation;
     unsigned k = pow(Area/vertices.size(), 0.5);
     float t = 10;
@@ -277,8 +277,8 @@ PNG Graph::BCVisualize() {
 
     // calculating all forces on each vertex and relocating them accordingly
     displacement.resize(coordinates.size());
-    PNG png(width, length);
-    for (int i = 0; i<1; i++) {
+    
+    for (int i = 0; i<20; i++) {
         for (Vertex* v : vertices){
             std::pair<int, int> vdisp(0,0);
             for (Vertex* u : vertices){
@@ -315,13 +315,39 @@ PNG Graph::BCVisualize() {
         }
 
         // begin writing vertices to PNG
+        PNG png(width, length);
         for (unsigned int i = 0; i < coordinates.size(); i++) {
-            unsigned int xPos = coordinates[i].first % width;
-            unsigned int yPos = coordinates[i].second % length;
+            int xPos = coordinates[i].first % width;
+            int yPos = coordinates[i].second % length;
             unsigned int color = (rand() * 360 / 100) % 360;
             int radius = 4;
             if (i == 0) {
                 radius = 30;
+            }
+            for (Edge* edge : vertices[i]->getEdge()) {
+               Vertex* target = getVertex(edge->vertex2);
+               if (vertices[i] == target) {
+                   target = getVertex(edge->vertex1);
+               }
+               int targetX = coordinates[target->getID()].first % width;
+               int targetY = coordinates[target->getID()].second % length;
+               int x0 = xPos;
+               int y0 = yPos;
+               int x{targetX - xPos}, y{targetY - yPos};
+                const int max{static_cast<int>(std::max(std::fabs(x), std::fabs(y)))};
+                if (max != 0) {
+                    x /= max; y /= max;
+                    unsigned int edgeColor = (rand() * 360 / 100) % 360;
+                    for (float n{0}; n < max; ++n)
+                    {
+                        // draw pixel at ( x0, y0 )
+                        HSLAPixel & pixel = png.getPixel(x0, y0);
+                        pixel.h = edgeColor;
+                        pixel.l = 0.8;
+                        pixel.s = 0.5;
+                        x0 += x; y0 += y;
+                    }
+                }                  
             }
             for (int x = -radius; x < radius; x++) {
                 for (int y = -radius; y < radius; y++) {
@@ -329,46 +355,17 @@ PNG Graph::BCVisualize() {
                         if (sqrt(x*x + y*y) <= radius) {  
                             HSLAPixel & pixel = png.getPixel(xPos + x, yPos + y);
                             pixel.h = color;
-                            pixel.l = 0.6;
+                            pixel.l = 0.2;
                             pixel.s = 0.5;
                         }    
                     }
                 }   
             }
-            for (Edge* edge : vertices[i]->getEdge()) {
-               Vertex* target = getVertex(edge->vertex2);
-               if (vertices[i] == target) {
-                   target = getVertex(edge->vertex1);
-               }
-               unsigned int targetX = coordinates[target->getID()].first % width;
-               unsigned int targetY = coordinates[target->getID()].second % length;
-               unsigned int dy = yPos - targetY; 
-               unsigned int dx = xPos - targetX; 
-               if (dy > dx) {
-                   for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
-                       unsigned int currentX = targetX + (yM - targetY) * dx / dy;
-                       if ((currentX < width) && (yM) < length && (currentX) >= 0 && (yM) >= 0){
-                        HSLAPixel & pixel = png.getPixel(currentX, yM);
-                        pixel.h = (rand() * 36) % 360;
-                        pixel.l = 0.6;
-                        pixel.s = 0.5;
-                       }
-                   }
-               } else {
-                   for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
-                       unsigned int currentY = targetY + (xM - targetX) * dy / dx;
-                       if ((xM < width) && (currentY) < length && (xM) >= 0 && (currentY) >= 0){
-                        HSLAPixel & pixel = png.getPixel(xM, currentY);
-                        pixel.h = (rand() * 36) % 360;
-                        pixel.l = 0.6;
-                        pixel.s = 0.5;
-                       }
-                   }
-               }               
-            }
+            
         }
 
         t *= 0.9;
+        animation.addFrame(png);
     }
-     return png;
+     return animation;
 }

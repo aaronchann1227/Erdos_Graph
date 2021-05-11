@@ -8,6 +8,7 @@
 #include "Animation.h"
 #include "Traversal.h"
 #include "Traversal.cpp"
+#include "cs225/PNG.h"
 using std::cout;
 using std::endl;
 
@@ -17,6 +18,10 @@ int main() {
     // construct Graph
     Graph graph(readErdos(), createAuthorToPaper());
 
+    Animation animation = graph.BCVisualize();
+
+    animation.write("ErdosPNG.gif");
+    /**
     Vertex* Erdos = graph.getRoot();
 
     cout << "\n\n";
@@ -25,7 +30,7 @@ int main() {
     // BFS
     Traversal Traversal(graph, Erdos);
     int count = -1;
-    while (!Traversal.T_done()){
+    while (!Traversal.T_done()) {
         count += 1;
         ++Traversal;
     }
@@ -55,6 +60,7 @@ int main() {
         expectedTotalWeight += edge->weight;
         numOfErdos1++;
     }
+
     float totalWeightErdos2 = (float) graph.getSize() - numOfErdos1 - 1;
     expectedTotalWeight += totalWeightErdos2;
 
@@ -76,6 +82,7 @@ int main() {
     cout << "The expected total weight of the spanning tree: "  << expectedTotalWeight << "\n";
 
     cout << "\n\n";
+    */
     return 0;
 }
 
