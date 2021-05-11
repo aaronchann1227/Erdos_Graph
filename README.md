@@ -1,3 +1,15 @@
+# CS 225 Final Project - Erdos Numbers
+
+# Project structure
+
+The Graph visualization, construction of the Graph and Minimal Spanning Tree is within Graph.cpp.
+
+The BFS Traversal is located in Traversal.cpp and BFSGraph.
+
+Information about Vertices and Edges are stored in Vertex.h and Edge.h, respectively.
+
+Data Processing is done in ErdosRead.cpp
+
 # sbalisi2-rnbhat2-mcchan3-yihanwu4
 Here is how to run the preliminary version of our project:
 
