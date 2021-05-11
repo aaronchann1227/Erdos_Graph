@@ -24,10 +24,19 @@ class Traversal {
          */
         bool T_done();
         
+        /**
+         * get vector that stores all namve visisted in order
+         */ 
         vector<string> getBFSvisited() { return BFSvisited; }
+
+        /**
+         * function that print out the first "itr"(number) names visited by BFS
+         */ 
         void printBFSvisited(unsigned itr);
 
     private:
         BFS bfs;
+
+        // The vector that stores all namve visisted in order
         vector<string> BFSvisited;
 };
