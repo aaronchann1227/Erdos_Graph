@@ -1,6 +1,8 @@
 # Final Results
 
-After working on this project for several weeks, we have finally reached a conclusion. We set out with the goals to create a graph of mathematicians from a csv file (found at the Erdos Project form Oakland University) and added our new touch of quantifying distance from Erdos based on number of publications in addition to number of collaborators. Our development consisted of four central elements:
+After working on this project for several weeks, we have finally reached a conclusion. We set out with the goals to create a graph of mathematicians from a csv file (found at the Erdos Project form Oakland University) and added our new touch of quantifying distance from Erdos based on number of publications in addition to number of collaborators. All of these goals have been met by the devlopment of our code.
+
+Our development consisted of four central elements:
 - The graph constructor
 - Breadth-First search algorithm
 - Kruskal's algorithm for minimum spanning tree
