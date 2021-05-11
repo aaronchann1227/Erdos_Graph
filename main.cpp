@@ -1,16 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cstdlib>
+
 #include <string>
 #include <vector>
-#include <iterator>
-#include <string>
-#include <vector>
-#include <sstream>
 #include <iostream>
-#include <iomanip>
-#include <unordered_map>
 #include "ErdosRead.hpp"
 #include "ErdosRead.cpp"
 #include "Graph.h"
@@ -19,7 +10,7 @@
 #include "Traversal.cpp"
 using std::cout;
 using std::endl;
-using namespace std;
+
 
 int main() {
     
@@ -34,7 +25,7 @@ int main() {
     }
 
     // print out the first 10 names that BFS traversed.
-    cout << "The first 10 Mathematicians that BFS traverses: ";
+    cout << "The first 10 Mathematicians that BFS traverses: \n";
     Traversal.printBFSvisited(10);
 
     
