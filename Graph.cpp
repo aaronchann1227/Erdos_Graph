@@ -232,18 +232,31 @@ std::vector<Edge*> Graph::KruskalMST() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // below is visualization algorithm: Barycentric method and its helper functions
 
+
+/**
+* method that calculates attractive forces between vertices of the Graph 
+*/
 float fa(unsigned x, unsigned k){
     return (x*x)/k;
 }
 
+/**
+* method that calculates repulsive forces between vertices of the Graph 
+*/
 float fr(unsigned x, unsigned k){
     return (k*k)/(x+0.0001);
 }
 
+/**
+* method that calculates magnitude of a 2D vector
+*/
 float magnitude(std::pair<int, int> delta){
     return pow((delta.first*delta.first)+(delta.second*delta.second),0.5);
 }
 
+/**
+* Implements The Barycentric Method and writes result to a PNG file 
+*/
 PNG Graph::BCVisualize() {
     Animation animation;
     unsigned k = pow(Area/vertices.size(), 0.5);
@@ -252,6 +265,7 @@ PNG Graph::BCVisualize() {
     std::vector<std::pair<int, int>> coordinates;
     std::vector<std::pair<int, int>> displacement;
 
+    // assign all vertices their initial random positions
     for (Vertex* v : vertices) {
         if (v->getID() == 0) {
            coordinates.push_back(std::pair<int, int>((width / 2), (length / 2)));
@@ -260,6 +274,8 @@ PNG Graph::BCVisualize() {
             coordinates.push_back(std::pair<int,int>((v->getID() * 50 + v->getID()) % width + 1, (v->getID() * 50) % width));
         }
     }
+
+    // calculating all forces on each vertex and relocating them accordingly
     displacement.resize(coordinates.size());
     PNG png(width, length);
     for (int i = 0; i<1; i++) {
@@ -286,10 +302,6 @@ PNG Graph::BCVisualize() {
             displacement[v1id].second -= (int)((delta.second / magnitude(delta)) * fa(magnitude(delta), k))%width;
             displacement[v2id].first += (int)((delta.first / magnitude(delta)) * fa(magnitude(delta), k))%width;
             displacement[v2id].second += (int)((delta.second / magnitude(delta)) * fa(magnitude(delta), k))%width;
-            // cout<<displacement[v1id].first<<endl;
-            // cout<<displacement[v1id].second<<endl;
-            // cout<<displacement[v2id].first<<endl;
-            // cout<<displacement[v2id].second<<endl;
 
         }
         for (Vertex* v : vertices){
@@ -302,7 +314,7 @@ PNG Graph::BCVisualize() {
             coordinates[ID].second = abs(coordinates[ID].second);
         }
 
-        
+        // begin writing vertices to PNG
         for (unsigned int i = 0; i < coordinates.size(); i++) {
             unsigned int xPos = coordinates[i].first % width;
             unsigned int yPos = coordinates[i].second % length;
@@ -355,12 +367,8 @@ PNG Graph::BCVisualize() {
                }               
             }
         }
-        //animation.addFrame(png);
-       
 
         t *= 0.9;
     }
-    //return coordinates;
-    //return animation;
      return png;
 }

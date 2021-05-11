@@ -83,9 +83,8 @@ class Graph {
         std::vector<Edge*> KruskalMST();
 
         /**
-        * THE BARYCENTRIC METHOD to visualize the Graph
+        * Implements The Barycentric Method and writes result to a PNG file 
         */
-        
         PNG BCVisualize();
 
 
@@ -130,16 +129,16 @@ class Graph {
 bool compareEdges(Edge* edge1, Edge* edge2);
 
 /**
-* helper function of BCVisualize()
+* method that calculates attractive forces between vertices of the Graph 
 */
 float fa(unsigned x, unsigned k);
 
 /**
-* helper function of BCVisualize()
+* method that calculates repulsive forces between vertices of the Graph 
 */
 float fr(unsigned x, unsigned k);
 
 /**
-* helper function of BCVisualize() to calculate the magnitude
+* method that calculates magnitude of a 2D vector
 */
 float magnitude(std::pair<int, int> delta);
