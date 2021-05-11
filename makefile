@@ -2,7 +2,7 @@
 EXENAME = Erdos
 
 # Object Types
-OBJS = Traversal.o Graph.o main.o DisjointSet.o Animation.o PNG.o HSLAPixel.o lodepng.o 
+OBJS = main.o Traversal.o Graph.o  DisjointSet.o Animation.o PNG.o HSLAPixel.o lodepng.o 
 
 # Compilation Flags
 CXX = clang++
@@ -23,8 +23,15 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-Graph.o: main.cpp Graph.cpp Vertex.h Edge.h DisjointSet.o Animation.o PNG.o
-	$(CXX) $(CXXFLAGS) main.cpp Graph.cpp 
+main: main.o Graph.o DisjointSet.o Traversal.o Animation.o PNG.o HSLAPixel.o lodepng.o
+	$(CXX) $(CXXFLAGS) -o main main.o Graph.o DisjointSet.o Traversal.o Animation.o PNG.o HSLAPixel.o lodepng.o 
+
+main.o: main.cpp Traversal.h Graph.h Animation.h  
+	$(CXX) $(CXXFLAGS) -c main.cpp
+
+
+Graph.o: Graph.cpp Vertex.h Edge.h DisjointSet.o Animation.o PNG.o 
+	$(CXX) $(CXXFLAGS) Graph.cpp 
 
 DisjointSet.o: DisjointSet.h 
 	$(CXX) $(CXXFLAGS) DisjointSet.cpp

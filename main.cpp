@@ -16,6 +16,7 @@
 #include "Graph.h"
 #include "Animation.h"
 #include "Traversal.h"
+#include "Traversal.cpp"
 using std::cout;
 using std::endl;
 using namespace std;
