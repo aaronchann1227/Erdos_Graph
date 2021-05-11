@@ -275,33 +275,37 @@ PNG Graph::BCVisualize() {
                     }
                 }   
             }
-            // for (Edge* edge : vertices[i]->getEdge()) {
-            //    Vertex* target = getVertex(edge->vertex2);
-            //    if (vertices[i] == target) {
-            //        target = getVertex(edge->vertex1);
-            //    }
-            //    unsigned int targetX = coordinates[target->getID()].first % width;
-            //    unsigned int targetY = coordinates[target->getID()].second % length;
-            //    unsigned int dy = yPos - targetY; 
-            //    unsigned int dx = xPos - targetX; 
-            //    if (dy > dx) {
-            //        for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
-            //            unsigned int currentX = targetX + (yM - targetY) * dx / dy;
-            //             HSLAPixel & pixel = png.getPixel(currentX, yM);
-            //             pixel.h = (rand() * 36) % 360;
-            //             pixel.l = 0.6;
-            //             pixel.s = 0.5;
-            //        }
-            //    } else {
-            //        for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
-            //            unsigned int currentY = targetY + (xM - targetX) * dy / dx;
-            //            HSLAPixel & pixel = png.getPixel(xM, currentY);
-            //            pixel.h = (rand() * 36) % 360;
-            //            pixel.l = 0.6;
-            //            pixel.s = 0.5;
-            //        }
-            //    }               
-            // }
+            for (Edge* edge : vertices[i]->getEdge()) {
+               Vertex* target = getVertex(edge->vertex2);
+               if (vertices[i] == target) {
+                   target = getVertex(edge->vertex1);
+               }
+               unsigned int targetX = coordinates[target->getID()].first % width;
+               unsigned int targetY = coordinates[target->getID()].second % length;
+               unsigned int dy = yPos - targetY; 
+               unsigned int dx = xPos - targetX; 
+               if (dy > dx) {
+                   for (unsigned int yM = targetY; yM != yPos; yM += (dy / abs((int) dy) )) {
+                       unsigned int currentX = targetX + (yM - targetY) * dx / dy;
+                       if ((currentX < width) && (yM) < length && (currentX) >= 0 && (yM) >= 0){
+                        HSLAPixel & pixel = png.getPixel(currentX, yM);
+                        pixel.h = (rand() * 36) % 360;
+                        pixel.l = 0.6;
+                        pixel.s = 0.5;
+                       }
+                   }
+               } else {
+                   for (unsigned int xM = targetX; xM != xPos; xM += (dx / abs((int) dx))) {
+                       unsigned int currentY = targetY + (xM - targetX) * dy / dx;
+                       if ((xM < width) && (currentY) < length && (xM) >= 0 && (currentY) >= 0){
+                        HSLAPixel & pixel = png.getPixel(xM, currentY);
+                        pixel.h = (rand() * 36) % 360;
+                        pixel.l = 0.6;
+                        pixel.s = 0.5;
+                       }
+                   }
+               }               
+            }
         }
         //animation.addFrame(png);
        
