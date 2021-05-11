@@ -6,7 +6,7 @@ OBJS = Traversal.o Graph.o main.o DisjointSet.o Animation.o PNG.o HSLAPixel.o lo
 
 # Compilation Flags
 CXX = clang++
-CXXFLAGS = $(CS225) -std=c++14 -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
+CXXFLAGS = $(CS225) -std=c++14 -stdlib=libc++ -c -g -O3 -Wall -Wextra -pedantic
 LD = clang++
 LDFLAGS = -std=c++14 -stdlib=libc++ -lc++abi -lm
 
@@ -24,7 +24,7 @@ $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
 Graph.o: main.cpp Graph.cpp Vertex.h Edge.h DisjointSet.o Animation.o PNG.o
-	$(CXX) $(CXXFLAGS) main.cpp Graph.cpp
+	$(CXX) $(CXXFLAGS) main.cpp Graph.cpp 
 
 DisjointSet.o: DisjointSet.h 
 	$(CXX) $(CXXFLAGS) DisjointSet.cpp
@@ -42,9 +42,10 @@ HSLAPixel.o: cs225/HSLAPixel.h
 	$(CXX) $(CXXFLAGS) cs225/HSLAPixel.cpp
 
 lodepng.o: cs225/lodepng/lodepng.h
-	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp		
+	$(CXX) $(CXXFLAGS) cs225/lodepng/lodepng.cpp	
+
 test: output_msg test.o catch/catchmain.cpp Graph.o Traversal.o DisjointSet.o 
-	$(LD) -g catch/catchmain.cpp test.o Graph.o Traversal.o DisjointSet.o $(LDFLAGS) -o test
+	$(LD) -g catch/catchmain.cpp test.o Graph.o Traversal.o DisjointSet.o PNG.o HSLAPixel.o lodepng.o $(LDFLAGS) -o test
 
 test.o: Tests/test.cpp catch/catch.hpp Vertex.h Edge.h
 	$(CXX) $(CXXFLAGS) Tests/test.cpp

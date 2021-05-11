@@ -213,6 +213,7 @@ PNG Graph::BCVisualize() {
         }
     }
     displacement.resize(coordinates.size());
+    PNG png(width, length);
     for (int i = 0; i<1; i++) {
         for (Vertex* v : vertices){
             std::pair<int, int> vdisp(0,0);
@@ -237,10 +238,10 @@ PNG Graph::BCVisualize() {
             displacement[v1id].second -= (int)((delta.second / magnitude(delta)) * fa(magnitude(delta), k))%width;
             displacement[v2id].first += (int)((delta.first / magnitude(delta)) * fa(magnitude(delta), k))%width;
             displacement[v2id].second += (int)((delta.second / magnitude(delta)) * fa(magnitude(delta), k))%width;
-            cout<<displacement[v1id].first<<endl;
-            cout<<displacement[v1id].second<<endl;
-            cout<<displacement[v2id].first<<endl;
-            cout<<displacement[v2id].second<<endl;
+            // cout<<displacement[v1id].first<<endl;
+            // cout<<displacement[v1id].second<<endl;
+            // cout<<displacement[v2id].first<<endl;
+            // cout<<displacement[v2id].second<<endl;
 
         }
         for (Vertex* v : vertices){
@@ -249,28 +250,30 @@ PNG Graph::BCVisualize() {
             coordinates[ID].second += (displacement[ID].second / magnitude(displacement[ID])) * min(magnitude(displacement[ID]), t);
             coordinates[ID].first = min(width, std::max(c, coordinates[ID].first)); 
             coordinates[ID].second = min(length, std::max(c, coordinates[ID].second));
-            coordinates[ID].first=abs(coordinates[ID].first);
-            coordinates[ID].second=abs(coordinates[ID].second);
+            coordinates[ID].first = abs(coordinates[ID].first);
+            coordinates[ID].second = abs(coordinates[ID].second);
         }
 
-        PNG png(width, length);
+        
         for (unsigned int i = 0; i < coordinates.size(); i++) {
             unsigned int xPos = coordinates[i].first % width;
             unsigned int yPos = coordinates[i].second % length;
-            unsigned int color = 4;
-            unsigned int radius = rand()%50;
+            unsigned int color = (rand() * 360 / 100) % 360;
+            int radius = 4;
             if (i == 0) {
-                radius = 60;
+                radius = 30;
             }
-            for (unsigned int x = xPos - (radius/2); x < xPos + (radius/2); x++) {
-                for (unsigned int y = yPos - (radius/2); y < yPos + (radius/2); y++) {
-                    if (sqrt(x*x + y*y) <= radius/2) {
-                        HSLAPixel & pixel = png.getPixel(x, y);
-                        pixel.h = color;
-                        pixel.l = 0.6;
-                        pixel.s = 0.5;
+            for (int x = -radius; x < radius; x++) {
+                for (int y = -radius; y < radius; y++) {
+                    if ((xPos + x < width) && (yPos + y) < length && (xPos + x) >= 0 && (yPos + y) >= 0) {  
+                        if (sqrt(x*x + y*y) <= radius) {  
+                            HSLAPixel & pixel = png.getPixel(xPos + x, yPos + y);
+                            pixel.h = color;
+                            pixel.l = 0.6;
+                            pixel.s = 0.5;
+                        }    
                     }
-                }
+                }   
             }
             // for (Edge* edge : vertices[i]->getEdge()) {
             //    Vertex* target = getVertex(edge->vertex2);
@@ -301,10 +304,11 @@ PNG Graph::BCVisualize() {
             // }
         }
         //animation.addFrame(png);
-        return png;
+       
 
         t *= 0.9;
     }
     //return coordinates;
     //return animation;
+     return png;
 }
