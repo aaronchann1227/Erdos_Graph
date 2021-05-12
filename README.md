@@ -1,6 +1,10 @@
 # CS 225 Final Project - Erdos Number
 ### Contributors: Man Chong Chan, Simon Balisi, Raghavendrea Bhat, (Jerry) Yihan Wu
 
+Presentation video: https://youtu.be/CPbKRIQbzLQ
+
+Presentation slides: https://docs.google.com/presentation/d/1wxhRDVWk-brV4DEhxVcOSx0XWHV_DsrDVkgfbUbxweg/edit?usp=sharing
+
 ![Alt Text](ErdosVisualization.gif)
 
 Above gif is the result of our visualization of the our graph using the Barycentric visualization which could be found in http://cs.brown.edu/people/rtamassi/gdhandbook/chapters/force-directed.pdf.
