@@ -44,4 +44,5 @@ This should create an executable file called test. You could then run `./test` i
 
 In addition to the visualization, our program outputs some sample results from our algorithms.
 
-![](https://i.imgur.com/wYdqfdd.png)
+<img src="https://i.imgur.com/Fw7WnmJ.png" width="560" height="860">
+
