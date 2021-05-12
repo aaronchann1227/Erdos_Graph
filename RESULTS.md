@@ -31,6 +31,9 @@ Lastly, we included a visualization algorithm so that we have a human-readable o
 
 ![Imgur](https://i.imgur.com/T9LaYLd.png)
 
+The output of main.cpp:
+
+<img src="https://i.imgur.com/Fw7WnmJ.png" width="560" height="860">
 
 ![Imgur](https://i.imgur.com/8o05yf4.png)
 Overall, we felt this project was a good success, and that our code could be applied to a more general situation. As you can see, all test were passed and you can run them yourself per the instructions in the README.md.
