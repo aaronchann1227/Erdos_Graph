@@ -119,7 +119,7 @@ class Graph {
         int width = 1000;
 
         // area of the visualization figure (constant)
-        int Area = length*width;
+        int area = length*width;
 
 };
 

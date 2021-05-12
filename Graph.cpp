@@ -259,7 +259,7 @@ float magnitude(std::pair<int, int> delta){
 */
 Animation Graph::BCVisualize() {
     Animation animation;
-    unsigned k = pow(Area/vertices.size(), 0.5);
+    unsigned k = pow(area/vertices.size(), 0.5);
     float t = 10;
     int c=0;
     std::vector<std::pair<int, int>> coordinates;
@@ -283,12 +283,12 @@ Animation Graph::BCVisualize() {
             std::pair<int, int> vdisp(0,0);
             for (Vertex* u : vertices){
                 if (v != u) {
-                    int cord1=coordinates[v->getID()].first-coordinates[u->getID()].first;
-                    int cord2=coordinates[v->getID()].second-coordinates[u->getID()].second;
+                    int cord1 = coordinates[v->getID()].first-coordinates[u->getID()].first;
+                    int cord2 = coordinates[v->getID()].second-coordinates[u->getID()].second;
                     std::pair<int, int> delta(cord1, cord2);
-                    vdisp.first+=(int)((delta.first/magnitude(delta)) * fr(magnitude(delta), k))%width;
-                    vdisp.second+=(int)((delta.second/magnitude(delta)) * fr(magnitude(delta), k))%width;
-                    displacement[v->getID()]=(vdisp);
+                    vdisp.first += (int)((delta.first/magnitude(delta)) * fr(magnitude(delta), k))%width;
+                    vdisp.second += (int)((delta.second/magnitude(delta)) * fr(magnitude(delta), k))%width;
+                    displacement[v->getID()] = vdisp;
                 }
             }
         }
@@ -314,7 +314,8 @@ Animation Graph::BCVisualize() {
             coordinates[ID].second = abs(coordinates[ID].second);
         }
 
-        // begin writing vertices to PNG
+        // begin writing Edges to PNG
+
         PNG png(width, length);
         for (unsigned int i = 0; i < coordinates.size(); i++) {
             int xPos = coordinates[i].first % width;
@@ -324,6 +325,7 @@ Animation Graph::BCVisualize() {
             if (i == 0) {
                 radius = 30;
             }
+            // Connecting two points together
             for (Edge* edge : vertices[i]->getEdge()) {
                Vertex* target = getVertex(edge->vertex2);
                if (vertices[i] == target) {
@@ -349,6 +351,7 @@ Animation Graph::BCVisualize() {
                     }
                 }                  
             }
+            // Drawing Vertices as little shaded circles
             for (int x = -radius; x < radius; x++) {
                 for (int y = -radius; y < radius; y++) {
                     if ((xPos + x < width) && (yPos + y) < length && (xPos + x) >= 0 && (yPos + y) >= 0) {  

@@ -18,15 +18,21 @@ int main() {
     // construct Graph
     Graph graph(readErdos(), createAuthorToPaper());
 
-    Animation animation = graph.BCVisualize();
-
-    animation.write("ErdosPNG.gif");
-    /**
+    
     Vertex* Erdos = graph.getRoot();
 
     cout << "\n\n";
+    cout << "Below are 10 mathematicians with Erdos number of 1: \n";
+    for (unsigned int i  = 0; i < 10; i++) {
+        cout << Erdos->getEdge()[i]->vertex2 << endl; 
+    }
 
-    /////////////////////////////////////////////////////////////////////
+    cout << "\n\n";
+    cout << "Below are 10 mathematicians with Erdos number of 2: \n";
+    for (unsigned int k = 1; k < 11; k++) {
+        cout << (graph.getWholeVertex())[1]->getEdge()[k]->vertex2 << endl;
+    }
+    // -----------------------------------------------------------------------------------------------------
     // BFS
     Traversal Traversal(graph, Erdos);
     int count = -1;
@@ -34,12 +40,13 @@ int main() {
         count += 1;
         ++Traversal;
     }
+    cout << "\n\n";
     // print out the first 10 names that BFS traversed.
     cout << "The first 10 Mathematicians that BFS traverses: \n";
     Traversal.printBFSvisited(10);
 
     cout << "\n\n";
-    /////////////////////////////////////////////////////////////////////
+    // -----------------------------------------------------------------------------------------------------
     // Kruskal MST
 
     // We compared the number of edges Kruskal returns to expected number of edges Kruskal returns, which is n-1.
@@ -82,7 +89,10 @@ int main() {
     cout << "The expected total weight of the spanning tree: "  << expectedTotalWeight << "\n";
 
     cout << "\n\n";
-    */
+
+    // ------Lines belowed were used to create the animation of the visualization---------    
+    // Animation animation = graph.BCVisualize();
+    // animation.write("ErdosVisualization.gif");
     return 0;
 }
 
