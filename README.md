@@ -1,7 +1,7 @@
 # CS 225 Final Project - Erdos Number
 ### Contributors: Man Chong Chan, Simon Balisi, Raghavendrea Bhat, (Jerry) Yihan Wu
 
-You can find our presentation here: https://youtu.be/CPbKRIQbzLQ
+Presentation video: https://youtu.be/CPbKRIQbzLQ
 
 ![Alt Text](ErdosVisualization.gif)
 
