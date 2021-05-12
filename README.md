@@ -5,6 +5,8 @@
 
 Above gif is the result of our visualization of the our graph using the Barycentric visualization which could be found in http://cs.brown.edu/people/rtamassi/gdhandbook/chapters/force-directed.pdf.
 
+You can find our presentation here: https://youtu.be/CPbKRIQbzLQ
+
 # What is an Erdos Number?
 
 The Erdos number is the number of edges one would need to travel from the mathematician Erdos to another mathematician. Two mathematicians share an edge if they have been co-authors on a paper. Our project explores this concept. We generated a graph using the the dataset from from Oakland University database of coauthors of Erdos (https://oakland.edu/enp/thedata). In addition we traversed the graph using Breadth First Search, generated a Minimal Spanning Tree using Kruskal's algorithm. 
